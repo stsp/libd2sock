@@ -18,7 +18,12 @@ gtnetent.c  inetaton.c  send.c \
 gtnetnam.c  inetlnof.c  sendmsg.c \
 gtproent.c  inetmkad.c  sendto.c
 
-OBJECTS = $(SOURCES:.c=.o)
+ASM_SOURCES = \
+            s_close.S   s_gprnm.S   s_listen.S  s_select.S  s_snblk.S \
+s_accept.S  s_connct.S  s_gscknm.S  s_recvfr.S  s_send.S    s_socket.S \
+s_bind.S    s_gnblk.S   s_initnt.S  s_recv.S    s_sendto.S  vxd.S
+
+OBJECTS = $(SOURCES:.c=.o) $(ASM_SOURCES:.S=.o)
 LIB = libsock.a
 
 all: $(LIB)
