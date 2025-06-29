@@ -260,14 +260,16 @@ int _dns_query( const char *name, int query_type, in_addr_t dnsaddr, struct host
     result = sendto( query_socket, buf, query_size, 0, (struct sockaddr *)&dest, sizeof( dest ) );
 
     if( result < 0 ) {
-        ret = -ENOMSG;
+//        ret = -ENOMSG;
+        ret = -ESRCH;
         goto dns_cleanup;
     }
 
     i = sizeof( dest );
     result = recvfrom( query_socket, buf, DNS_BUFFER_SIZE, 0, (struct sockaddr *)&dest, (socklen_t *)&i );
     if( result < 0 ) {
-        ret = -ENOMSG;
+//        ret = -ENOMSG;
+        ret = -ESRCH;
         goto dns_cleanup;
     }
 

@@ -95,7 +95,8 @@ static struct hostent *__check_dns_4( const char *name )
     case EINVAL:
     case ENOMEM:
     case EAGAIN:
-    case ENOMSG:
+//    case ENOMSG:
+    case ESRCH:
         h_errno = TRY_AGAIN;
         break;
     case ENOENT:
