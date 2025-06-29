@@ -33,7 +33,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "variety.h"
 #include <sys/types.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>

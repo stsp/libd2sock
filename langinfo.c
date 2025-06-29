@@ -31,7 +31,6 @@
 ****************************************************************************/
 
 
-#include "variety.h"
 #include <stddef.h>
 #include <stdio.h>
 #include <langinfo.h>

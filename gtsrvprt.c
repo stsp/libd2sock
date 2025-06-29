@@ -31,15 +31,12 @@
 ****************************************************************************/
 
 
-#include "variety.h"
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
 #include <stdlib.h>
 #include <string.h>
-#include "rterrno.h"
-#include "thread.h"
-
+#include <errno.h>
 
 #define SAFE_SAME_STR(x, y)  (x != NULL && y != NULL && strcmp(x,y) == 0)
 
@@ -48,7 +45,7 @@ _WCRTLINK struct servent *getservbyport( int port, const char *proto )
     struct servent *ret;
 
     if( port < 1 ) {
-        _RWD_errno = EINVAL;
+        errno = EINVAL;
         return( NULL );
     }
 

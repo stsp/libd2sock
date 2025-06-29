@@ -30,7 +30,6 @@
 ****************************************************************************/
 
 
-#include "variety.h"
 #include <stdio.h>
 #include <sys/types.h>
 #include <netinet/in.h>

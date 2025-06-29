@@ -1,5 +1,5 @@
 CC = owcc
-CFLAGS = -Ihh -Ilh -Ih
+CFLAGS = -Ilh -Ih
 LD = wlib
 
 SOURCES = \

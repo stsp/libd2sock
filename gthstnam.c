@@ -30,7 +30,6 @@
 *
 ****************************************************************************/
 
-#include "variety.h"
 #include "_resolve.h"
 #include <stdio.h>
 #include <sys/types.h>
@@ -39,7 +38,7 @@
 #include <stdlib.h>
 #include <netdb.h>
 #include <string.h>
-#include "rterrno.h"
+#include <errno.h>
 #include "csock.h"
 
 static struct hostent *__check_hostdb( const char *name )

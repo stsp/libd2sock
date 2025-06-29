@@ -30,15 +30,11 @@
 *
 ****************************************************************************/
 
-#include "variety.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <netdb.h>
-#include "rtdata.h"
-#include "rterrno.h"
-#include "thread.h"
-
+#include <errno.h>
 
 _WCRTLINK struct hostent *gethostbyaddr(const void *addr, socklen_t len, int type)
 {
@@ -47,7 +43,7 @@ _WCRTLINK struct hostent *gethostbyaddr(const void *addr, socklen_t len, int typ
     int cont;
 
     if(addr == NULL) {
-        _RWD_errno = EINVAL;
+        errno = EINVAL;
         return( NULL );
     }
 

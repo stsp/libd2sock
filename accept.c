@@ -1,7 +1,6 @@
 /* socket lib by @stsp */
 /* Sybase Open Watcom Public License */
 
-#include "variety.h"
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>

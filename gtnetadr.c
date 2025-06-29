@@ -30,8 +30,6 @@
 *
 ****************************************************************************/
 
-#include "variety.h"
-#include "rtdata.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
