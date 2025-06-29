@@ -1,63 +1,44 @@
-/****************************************************************************
-*
-*                            Open Watcom Project
-*
-* Copyright (c) 2015-2016 The Open Watcom Contributors. All Rights Reserved.
-*    Portions Copyright (c) 1983-2002 Sybase, Inc. All Rights Reserved.
-*
-*  ========================================================================
-*
-*    This file contains Original Code and/or Modifications of Original
-*    Code as defined in and that are subject to the Sybase Open Watcom
-*    Public License version 1.0 (the 'License'). You may not use this file
-*    except in compliance with the License. BY USING THIS FILE YOU AGREE TO
-*    ALL TERMS AND CONDITIONS OF THE LICENSE. A copy of the License is
-*    provided with the Original Code and Modifications, and is also
-*    available at www.sybase.com/developer/opensource.
-*
-*    The Original Code and all software distributed under the License are
-*    distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
-*    EXPRESS OR IMPLIED, AND SYBASE AND ALL CONTRIBUTORS HEREBY DISCLAIM
-*    ALL SUCH WARRANTIES, INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF
-*    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR
-*    NON-INFRINGEMENT. Please see the License for the specific language
-*    governing rights and limitations under the License.
-*
-*  ========================================================================
-*
-* Description:  Implementation of getsockname() for Linux and RDOS.
-*
-****************************************************************************/
-
+/* socket lib by @stsp */
+/* Sybase Open Watcom Public License */
 
 #include "variety.h"
 #include <sys/types.h>
 #include <sys/socket.h>
-
-#if defined( __LINUX__ )
-#include "linuxsys.h"
-#elif defined( __RDOS__ )
-#include "rdos.h"
-#endif
+#include <netinet/in.h>
+#include "csock.h"
 
 _WCRTLINK int getsockname( int s , struct sockaddr *name , socklen_t *namelen )
 {
-#if defined( __LINUX__ )
-    unsigned long args[3];
+    struct sockaddr_in *sock_sa = (struct sockaddr_in *) name;
+    ULONG32 sock_addr = 0;
+    unsigned short sock_port = 0;
+    int err;
 
-    args[0] = (unsigned long)s;
-    args[1] = (unsigned long)name;
-    args[2] = (unsigned long)namelen;
-    return( __socketcall( SYS_GETSOCKNAME, args ) );
-#elif defined( __RDOS__ )
+    err = ___csock_getsockname(s, &sock_addr, &sock_port);
+    if (err)
+        return -1;
+    *namelen = sizeof (struct sockaddr_in);
 
-    /* unused parameters */ (void)s; (void)name; (void)namelen;
+    sock_sa->sin_family = AF_INET;
+    sock_sa->sin_addr.s_addr = sock_addr;
+    sock_sa->sin_port = sock_port;
+    return 0;
+}
 
-    return( -1 );
-#else
+_WCRTLINK int getpeername( int s , struct sockaddr *name , socklen_t *namelen )
+{
+    struct sockaddr_in *sock_sa = (struct sockaddr_in *) name;
+    ULONG32 sock_addr = 0;
+    unsigned short sock_port = 0;
+    int err;
 
-    /* unused parameters */ (void)s; (void)name; (void)namelen;
+    err = ___csock_getpeername(s, &sock_addr, &sock_port);
+    if (err)
+        return -1;
+    *namelen = sizeof (struct sockaddr_in);
 
-    return( -1 );
-#endif
+    sock_sa->sin_family = AF_INET;
+    sock_sa->sin_addr.s_addr = sock_addr;
+    sock_sa->sin_port = sock_port;
+    return 0;
 }
