@@ -40,12 +40,7 @@
 #include <netdb.h>
 #include <string.h>
 #include "rterrno.h"
-#ifdef __RDOS__
-#include "rdos.h"
-#else
-#include "thread.h"
-
-#define DNSRESOLV   "/etc/resolv.conf"
+#include "csock.h"
 
 static struct hostent *__check_hostdb( const char *name )
 {
@@ -77,60 +72,10 @@ static struct hostent *__check_hostdb( const char *name )
  */
 static int __get_nameserver( int last, in_addr_t *dnsaddr )
 {
-    FILE    *fp;
-    int     ret;
-
-    /* for parsing resolv.conf */
-    char    *currentline;
-    size_t  linelength;
-    int     which;
-    char    *ptrlabel;
-    char    *ptraddr;
-    char    *ptraddrtail;
-
-    ret = 0;
-    fp = fopen( DNSRESOLV, "r" );
-    if( fp != NULL ) {
-        which = 0;
-        currentline = NULL;
-        linelength = 0;
-
-        while( getline( &currentline, &linelength, fp ) >= 0 ) {
-            ptrlabel = currentline;
-            while( *ptrlabel == ' ' || *ptrlabel == '\t' )
-                ptrlabel++;
-
-            if( *ptrlabel == '\0' )
-                continue;
-
-            ptraddr = ptrlabel;
-            while( *ptraddr != ' ' && *ptraddr != '\t' && *ptraddr != '\0' )
-                ptraddr++;
-            *ptraddr = '\0';
-
-            if( strcmp( ptrlabel, "nameserver" ) == 0 ) {
-                if( which == last ) {
-                    ptraddr++;
-                    while( *ptraddr == ' ' || *ptraddr == '\t' )
-                        ptraddr++;
-                    ptraddrtail = ptraddr;
-                    while( *ptraddrtail != ' ' && *ptraddrtail != '\t' &&
-                          *ptraddrtail != '\0' && *ptraddrtail != '\n' )
-                        ptraddrtail++;
-                    *ptraddrtail = '\0';
-                    if( *ptraddr != '\0' ) {
-                        *dnsaddr = inet_addr( ptraddr );
-                        ret = 1;
-                        break;
-                    }
-                } else {
-                    which++;
-                }
-            }
-        }
-        fclose( fp );
-    }
-    return( ret );
+    if (last)
+        return 0;
+    *dnsaddr = driver_info.dnsserver;
+    return 1;
 }
 
 static struct hostent *__check_dns_4( const char *name )
@@ -163,36 +108,12 @@ static struct hostent *__check_dns_4( const char *name )
     }
     return( NULL );
 }
-#endif
-
 
 _WCRTLINK struct hostent *gethostbyname( const char *name )
 {
-#ifdef __RDOS__
-    static struct hostent  ret;
-    static uint32_t *list[2];
-    static uint32_t ip;
-    ip = inet_addr( name );
-    if( ip == INADDR_NONE ) {
-        ip = RdosNameToIp( name );
-        if( ip == 0 ) {
-            h_errno = HOST_NOT_FOUND;
-            return( NULL );
-        }
-    }
-    ret.h_name = (char *)name;
-    ret.h_aliases = NULL;
-    ret.h_addrtype = AF_INET;
-    ret.h_length = sizeof( uint32_t );
-    list[0] = &ip;
-    list[1] = 0;
-    ret.h_addr_list = (char **)list;
-    return( &ret );
-#else
     static struct hostent   *ret;
     ret = __check_hostdb( name );
     if( ret == NULL )
         ret = __check_dns_4( name );
     return( ret );
-#endif
 }
