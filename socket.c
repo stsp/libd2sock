@@ -58,3 +58,8 @@ _WCRTLINK int socket( int domain, int type, int protocol )
         return -1;
     return fd;
 }
+
+int closesocket (int s)
+{
+    return ___csock_close(s);
+}

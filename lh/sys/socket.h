@@ -134,6 +134,7 @@ struct linger {
 typedef unsigned int socklen_t;
 
 _WCRTLINK extern int socket( int __domain, int __type, int __protocol );
+_WCRTLINK int closesocket (int s);
 _WCRTLINK extern int bind( int __sockfd, const struct sockaddr *__my_addr, socklen_t __addrlen );
 _WCRTLINK extern int getsockopt( int __s, int __level, int __optname, void *__optval, socklen_t *__optlen );
 _WCRTLINK extern int setsockopt( int __s, int __level, int __optname, const void *__optval, socklen_t __optlen );
