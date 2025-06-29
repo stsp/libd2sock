@@ -116,6 +116,9 @@ struct sockaddr_in {
 
 #define IP_LOOPBACKNET          127
 
+#define INET_ADDRSTRLEN 16
+#define INET6_ADDRSTRLEN 46
+
 _WCRTLINK extern unsigned long htonl(unsigned long __hostlong);
 _WCRTLINK extern unsigned short htons(unsigned short __hostshort);
 _WCRTLINK extern unsigned long ntohl(unsigned long __netlong);

@@ -43,6 +43,10 @@ _WCRTLINK extern struct in_addr inet_makeaddr( int __net, int __host );
 _WCRTLINK extern in_addr_t      inet_lnaof( struct in_addr __in );
 _WCRTLINK extern in_addr_t      inet_netof( struct in_addr __in );
 
+_WCRTLINK extern int inet_pton(int __af, const char *__cp, void *__buf);
+_WCRTLINK extern const char *inet_ntop(int __af, const void *__cp,
+                                       char *__buf, socklen_t __len);
+
 #pragma pack( __pop )
 
 #ifdef __cplusplus
