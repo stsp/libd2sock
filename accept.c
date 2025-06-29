@@ -33,6 +33,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 
+#include "csock.h"
 #if defined( __LINUX__ )
 #include "linuxsys.h"
 #elif defined( __RDOS__ )
