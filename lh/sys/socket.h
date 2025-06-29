@@ -127,7 +127,14 @@ struct linger {
 /* Maximum backlog for the listen( ) function - system-configurable */
 #define SOMAXCONN sysconf(_SC_SOMAXCONN)
 
-#include _ARCH_INCLUDE(sys/socket.h)
+//#include _ARCH_INCLUDE(sys/socket.h)
+#define SOCK_STREAM     1
+#define SOCK_DGRAM      2
+#define SOCK_RAW        3
+#define SOCK_RDM        4
+#define SOCK_SEQPACKET  5
+#define SOCK_PACKET     10
+#define SOCK_MAX        (SOCK_PACKET+1)
 
 
 
