@@ -62,6 +62,17 @@ struct hostent {
 };
 #define h_addr  h_addr_list[0]  /* for backward compatibility */
 
+struct addrinfo {
+  int              ai_flags;
+  int              ai_family;
+  int              ai_socktype;
+  int              ai_protocol;
+  socklen_t        ai_addrlen;
+  struct sockaddr *ai_addr;
+  char            *ai_canonname;
+  struct addrinfo *ai_next;
+};
+
 _WCRTDATA extern int h_errno;
 
 #define HOST_NOT_FOUND 1
@@ -95,6 +106,10 @@ _WCRTLINK extern struct hostent  *gethostbyaddr( const void *__addr, socklen_t _
 _WCRTLINK extern struct hostent  *gethostent(void);
 _WCRTLINK extern void            sethostent( int __stayopen );
 _WCRTLINK extern void            endhostent( void );
+
+_WCRTLINK int getaddrinfo(const char *host, const char *serv,
+    const struct addrinfo *hint, struct addrinfo **res);
+_WCRTLINK void freeaddrinfo(struct addrinfo *res);
 
 _WCRTLINK extern void            herror( const char *__s );
 _WCRTLINK extern const char      *hstrerror( int __err );

@@ -6,7 +6,7 @@ SOURCES = \
 accept.c    gtpronam.c  inetnet.c   shutdown.c \
 bind.c      gtpronum.c  inetneto.c \
 gtscknam.c  inetntoa.c \
-gtsckopt.c \
+gtsckopt.c  gaddrinf.c \
 connect.c   gtsrvent.c  listen.c \
 gtsrvnam.c  ntohl.c \
 gtsrvprt.c  ntohs.c     recv.c      socket.c \
