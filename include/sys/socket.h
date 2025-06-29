@@ -33,20 +33,6 @@ extern "C" {
  #include <unistd.h>
 #endif
 
-#ifndef _ARCH_DIR
- #ifdef __386__
-  #define _ARCH_DIR i386
- #elif defined(__MIPS__)
-  #define _ARCH_DIR mips
- #elif defined(__PPC__)
-  #define _ARCH_DIR ppc
- #else
-  #error unknown platform
-  #define _ARCH_DIR
- #endif
- #define _ARCH_INCLUDE(hdr) <arch/ ## _ARCH_DIR ## / ## hdr ## >
-#endif /* !_ARCH_DIR */
-
 #ifndef _SA_FAMILY_T_DEFINED_
 #define _SA_FAMILY_T_DEFINED_
 typedef unsigned short sa_family_t;
