@@ -5,7 +5,7 @@
 #include <sys/select.h>
 #include "csock.h"
 
-int select_s (int nfds, fd_set *readfds, fd_set *writefds,
+_WCRTLINK int select_s (int nfds, fd_set *readfds, fd_set *writefds,
               fd_set *exceptfds, struct timeval *timeout)
 {
     ULONG32 to = timeout->tv_sec * 1000000 + timeout->tv_usec;

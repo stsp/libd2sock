@@ -13,7 +13,7 @@ gtsrvprt.c  ntohs.c     recv.c      socket.c \
 gthstadr.c  _h_errno.c  recvfrom.c  stsckopt.c \
 gthstent.c  htonl.c     _prscfg.c   recvmsg.c  \
 gthstnam.c  htons.c     _resolve.c \
-gtnetadr.c  inetaddr.c \
+gtnetadr.c  inetaddr.c  fcntl.c \
 gtnetent.c  inetaton.c  send.c \
 gtnetnam.c  inetlnof.c  sendmsg.c \
 gtproent.c  inetmkad.c  sendto.c
