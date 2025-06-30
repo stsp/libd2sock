@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <errno.h>
 #include "csock.h"
 
 _WCRTLINK int getsockname( int s , struct sockaddr *name , socklen_t *namelen )
@@ -14,8 +15,10 @@ _WCRTLINK int getsockname( int s , struct sockaddr *name , socklen_t *namelen )
     int err;
 
     err = ___csock_getsockname(s, &sock_addr, &sock_port);
-    if (err)
+    if (err) {
+        errno = __csock_errno(err);
         return -1;
+    }
     *namelen = sizeof (struct sockaddr_in);
 
     sock_sa->sin_family = AF_INET;
@@ -32,8 +35,10 @@ _WCRTLINK int getpeername( int s , struct sockaddr *name , socklen_t *namelen )
     int err;
 
     err = ___csock_getpeername(s, &sock_addr, &sock_port);
-    if (err)
+    if (err) {
+        errno = __csock_errno(err);
         return -1;
+    }
     *namelen = sizeof (struct sockaddr_in);
 
     sock_sa->sin_family = AF_INET;

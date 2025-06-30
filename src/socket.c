@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <errno.h>
 #include "csock.h"
 
 static int initialized;
@@ -53,8 +54,10 @@ _WCRTLINK int socket( int domain, int type, int protocol )
         proto = protocol;
     }
     err = ___csock_open(proto, &fd);
-    if (err)
+    if (err) {
+        errno = __csock_errno(err);
         return -1;
+    }
     return fd;
 }
 

@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <errno.h>
 #include "csock.h"
 
 _WCRTLINK int accept(int s, struct sockaddr *addr, socklen_t *addrlen)
@@ -15,8 +16,10 @@ _WCRTLINK int accept(int s, struct sockaddr *addr, socklen_t *addrlen)
     struct sockaddr_in *addr_sa = (struct sockaddr_in *) addr;
 
     err = ___csock_accept(s, &fd, &dest_addr, &dest_port);
-    if (err)
+    if (err) {
+        errno = __csock_errno(err);
         return -1;
+    }
     /* Copy the peer address */
     addr_sa->sin_family      = AF_INET;
     addr_sa->sin_addr.s_addr = dest_addr;
