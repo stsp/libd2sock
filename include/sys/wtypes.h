@@ -48,11 +48,6 @@
 #include <sys/types.h>
 #endif
 
-#if !defined(socklen_t)
-  typedef int           socklen_t;
-  #define socklen_t     socklen_t
-#endif
-
 #if defined( __WATCOMC__ )
   #if defined(_M_I86)
     typedef unsigned long u_int;    /* too many headers assume u_int is 32-bit */
