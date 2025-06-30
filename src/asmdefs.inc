@@ -1,6 +1,6 @@
 FUNC macro nm
 PUBLIC nm
-nm PROC NEAR C
+nm PROC NEAR
 endm
 ARG1 macro
 [ebp+8]

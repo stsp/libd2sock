@@ -1,5 +1,6 @@
 CC = owcc
-CFLAGS = -I../include -Ih
+CFLAGS = -I../include -Ih -b dos4g
+ASFLAGS = -b dos4g
 LD = wlib
 
 SOURCES = \
@@ -24,7 +25,7 @@ s_accept.S  s_connct.S  s_gscknm.S  s_recvfr.S  s_send.S    s_socket.S \
 s_bind.S    s_gnblk.S   s_initnt.S  s_recv.S    s_sendto.S  vxd.S
 
 OBJECTS = $(SOURCES:.c=.o) $(ASM_SOURCES:.S=.o)
-LIB = libcsock.a
+LIB = libcsock.lib
 
 all: $(LIB)
 
