@@ -1,6 +1,8 @@
 #ifndef CSOCK_H
 #define CSOCK_H
 
+#include <stdint.h>
+
 #define LONG32 int
 #define ULONG32 unsigned int
 #define __out
@@ -41,5 +43,26 @@ LONG32 __cdecl ___csock_getnblkio(ULONG32 fd, __out ULONG32 *nb);
 LONG32 __cdecl ___csock_setnblkio(ULONG32 fd, __out ULONG32 nb);
 
 LONG32 __cdecl VxdGetEntry(ULONG32 id);
+
+/* --- Defines --- */
+
+/* Error codes, taken from sock.h from Coda's sock.vxd source */
+#define CSOCK_ERR_INVALID_PARAM       0x00000100
+#define CSOCK_ERR_NO_MEMORY           0x00000200
+#define CSOCK_ERR_INVALID_SOCKET      0x00000300
+#define CSOCK_ERR_ALREADY_BOUND       0x00000400
+#define CSOCK_ERR_NOT_BOUND           0x00000500
+#define CSOCK_ERR_ACCESS              0x00000600
+#define CSOCK_ERR_INTERNAL            0x00000700
+#define CSOCK_ERR_FD_INUSE            0x00000800
+#define CSOCK_ERR_INFINITE_WAIT       0x00000900
+#define CSOCK_ERR_NOT_CONNECTED       0x00000a00
+#define CSOCK_ERR_WOULD_BLOCK         0x00000b00
+#define CSOCK_ERR_NOT_LISTENING       0x00000c00
+
+/* Minimum error code - used to distinguish sock.vxd errors from TDI ones. */
+#define CSOCK_ERR_MIN CSOCK_ERR_INVALID_PARAM
+
+extern int __csock_errno (int /* i_errno */);
 
 #endif

@@ -26,7 +26,6 @@ FUNC ____csock_select
     mov [esi], edx
     mov esi, ARG4
     mov [esi], edi
-    xor eax, eax          ; // Clear EAX (set it to 0) on success
 l2:
     _LEAVE
 l1:

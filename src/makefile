@@ -5,10 +5,10 @@ LD = wlib
 SOURCES = \
 accept.c    gtpronam.c  inetnet.c   shutdown.c \
 bind.c      gtpronum.c  inetneto.c \
-gtscknam.c  inetntoa.c \
+gtscknam.c  inetntoa.c  select.c \
 gtsckopt.c  gaddrinf.c  presaddr.c \
 connect.c   gtsrvent.c  listen.c \
-gtsrvnam.c  ntohl.c \
+gtsrvnam.c  ntohl.c     c_errors.c \
 gtsrvprt.c  ntohs.c     recv.c      socket.c \
 gthstadr.c  _h_errno.c  recvfrom.c  stsckopt.c \
 gthstent.c  htonl.c     _prscfg.c   recvmsg.c  \
