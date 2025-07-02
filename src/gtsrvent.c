@@ -70,6 +70,8 @@ _WCRTLINK struct servent *getservent( void )
 
     if( __servFile == NULL )
         setservent( 0 );
+    if( __servFile == NULL )
+        return NULL;
 
     /* First pass */
     if( buf == NULL ) {
