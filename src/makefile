@@ -1,5 +1,5 @@
 CC = owcc
-CFLAGS = -I../include -Ih -b dos4g
+CFLAGS = -I../include -Ih -b dos4g -g3
 ASFLAGS = -b dos4g
 LD = wlib
 
