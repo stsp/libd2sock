@@ -16,7 +16,7 @@ FUNC ____csock_select
     mov esi, ARG4
     mov edi, [esi]
     mov eax, 6
-    call FAR PTR [_csock_entry]      ; // Call the entry point for SOCK.VXD
+    call FWORD PTR ds:[_csock_entry]      ; // Call the entry point for SOCK.VXD
     jc l1                    ; // Jump to label 1 if the carry flag is set (error)
     mov esi, ARG1
     mov [esi], ebx

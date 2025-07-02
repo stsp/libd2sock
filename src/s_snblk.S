@@ -11,7 +11,7 @@ FUNC ____csock_setnblkio
     mov ecx, 1
     mov edx, ARG2
     mov eax, 15
-    call FAR PTR [_csock_entry]     ; // Call the entry point for SOCK.VXD
+    call FWORD PTR ds:[_csock_entry]     ; // Call the entry point for SOCK.VXD
     jc l1                    ; // Jump to label 1 if the carry flag is set (error)
     xor eax, eax          ; // Clear EAX (set it to 0) on success
 l2:

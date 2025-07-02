@@ -10,7 +10,7 @@ FUNC ____csock_get_version
     mov edi, ARG2
     mov esi, ARG3
     mov eax, 0            ; // Set EAX to 0 for the version call
-    call FAR PTR [_csock_entry]      ; // Call the entry point for SOCK.VXD
+    call FWORD PTR ds:[_csock_entry]      ; // Call the entry point for SOCK.VXD
     jc l1                    ; // Jump to label 1 if the carry flag is set (error)
     mov ebx, ARG1
     mov [ebx], eax
