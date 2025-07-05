@@ -1,6 +1,6 @@
 CC = owcc
 CFLAGS = -I../include -Ih -b dos4g -g3
-ASFLAGS = -b dos4g
+ASFLAGS = -b dos4g -g3
 LD = wlib
 
 SOURCES = \
