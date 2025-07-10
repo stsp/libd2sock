@@ -73,6 +73,10 @@ static int __get_nameserver( int last, in_addr_t *dnsaddr )
 {
     if (last)
         return 0;
+    if (!driver_info.dnsserver)
+        csock_init();
+    if (!driver_info.dnsserver)
+        return 0;
     *dnsaddr = driver_info.dnsserver;
     return 1;
 }

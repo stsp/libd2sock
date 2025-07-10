@@ -10,7 +10,7 @@
 static int initialized;
 struct driver_info_rec driver_info;
 
-static int socket_init(void)
+int csock_init(void)
 {
     const int CSOCK_VXD_ID = 0x1235;
     unsigned int __csock_version = 0;
@@ -32,7 +32,7 @@ _WCRTLINK int socket( int domain, int type, int protocol )
     unsigned int fd;
 
     if (!initialized) {
-        err = socket_init();
+        err = csock_init();
         initialized++;
     }
     if (err)

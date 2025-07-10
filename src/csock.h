@@ -43,6 +43,7 @@ LONG32 __cdecl ___csock_getnblkio(ULONG32 fd, __out ULONG32 *nb);
 LONG32 __cdecl ___csock_setnblkio(ULONG32 fd, ULONG32 nb);
 
 LONG32 __cdecl VxdGetEntry(ULONG32 id);
+int csock_init(void);
 
 /* --- Defines --- */
 
