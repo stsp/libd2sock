@@ -188,13 +188,13 @@ static char **_add_string_to_list( char **addr_list, char *text )
     return( addr_list );
 }
 
-static char **_add_address_to_list( char **addr_list, struct in_addr addr )
+static char **_add_address_to_list( char **addr_list, struct in_addr *addr )
 {
     char *allocated_address;
 
-    allocated_address = malloc( 64 );
+    allocated_address = malloc( sizeof( struct in_addr ) );
     if( allocated_address != NULL )
-        strcpy( allocated_address, inet_ntoa( addr ) );
+        memcpy( allocated_address, addr, sizeof( struct in_addr ) );
 
     return( _add_string_to_list( addr_list, allocated_address ) );
 }
@@ -334,7 +334,7 @@ int _dns_query( const char *name, int query_type, in_addr_t dnsaddr, struct host
 
             lptr = (struct in_addr *)answers[i].rdata;
 
-            res->h_addr_list = _add_address_to_list( res->h_addr_list, *lptr );
+            res->h_addr_list = _add_address_to_list( res->h_addr_list, lptr );
             ret = 1;
         } else {
             /* Answer should just be a string */
