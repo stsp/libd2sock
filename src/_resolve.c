@@ -202,7 +202,7 @@ static char **_add_address_to_list( char **addr_list, struct in_addr *addr )
 int _dns_query( const char *name, int query_type, in_addr_t dnsaddr, struct hostent *res )
 {
     char            *buf, *query_name, *reader;
-    int             query_socket;
+    int             query_socket = -1;
     int             i, j;
     int             name_length;
     int             result;
@@ -357,6 +357,7 @@ int _dns_query( const char *name, int query_type, in_addr_t dnsaddr, struct host
 
 dns_cleanup:
 
+    closesocket( query_socket );
     if( answers != NULL && dns != NULL ) {
         for( i = 0; i < n_answers; i++ ) {
             if( answers[i].name != NULL )
