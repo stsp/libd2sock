@@ -122,7 +122,7 @@ struct linger {
 #define SOCK_PACKET     10
 #define SOCK_MAX        (SOCK_PACKET+1)
 
-
+#define SOL_SOCKET      0xffff
 
 typedef unsigned int socklen_t;
 
