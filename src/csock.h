@@ -41,6 +41,7 @@ LONG32 __cdecl ___csock_getsockname(ULONG32 fd, __out ULONG32 *addr, __out unsig
 LONG32 __cdecl ___csock_getpeername(ULONG32 fd, __out ULONG32 *addr, __out unsigned short *port);
 LONG32 __cdecl ___csock_getnblkio(ULONG32 fd, __out ULONG32 *nb);
 LONG32 __cdecl ___csock_setnblkio(ULONG32 fd, ULONG32 nb);
+LONG32 __cdecl ___csock_fionread(ULONG32 fd, __out ULONG32 *outq);
 
 LONG32 __cdecl VxdGetEntry(ULONG32 id);
 int csock_init(void);
