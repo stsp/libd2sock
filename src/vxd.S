@@ -4,8 +4,13 @@ __data
 
 PUBLIC _csock_entry
 _csock_entry:
+ifdef __USE32
 csock_entry_ip: DD 0
 csock_entry_cs: DD 0
+else
+csock_entry_ip: DW 0
+csock_entry_cs: DW 0
+endif
 
 _DATA ENDS
 
@@ -25,8 +30,13 @@ FUNC _VxdGetEntry
     jc l1
     test ebx, ebx
     jz l1
-    mov csock_entry_cs, ebx
-    mov csock_entry_ip, edi
+ifdef __USE32
+    mov [csock_entry_cs], ebx
+    mov [csock_entry_ip], edi
+else
+    mov [csock_entry_cs], bx
+    mov [csock_entry_ip], di
+endif
     xor eax, eax          ; // Clear EAX (set it to 0) on success
 l2:
     _LEAVE

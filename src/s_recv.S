@@ -2,7 +2,7 @@ include asmdefs.inc
 
 .text
 
-extrn _csock_entry:FWORD
+csock_ent
 
 FUNC ____csock_recv
     _ENTER
@@ -11,7 +11,7 @@ FUNC ____csock_recv
     mov esi, ARG2
     mov ecx, ARG3
     mov eax, 9
-    call FWORD PTR ds:[_csock_entry]      ; // Call the entry point for SOCK.VXD
+    call_csock
     jc l1                    ; // Jump to label 1 if the carry flag is set (error)
     mov edi, ARG4
     mov [edi], ecx

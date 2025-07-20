@@ -1,12 +1,24 @@
-CC = wcc386
 AS = wasm
 ifneq ($(W16),)
-TARG = WINDOWS_DLL
+TARG = -bt=WINDOWS_DLL
+CF = -3r
+ASF = -3ps
+CC = wcc386
 else
-TARG = dos4g
+ifneq ($(D16),)
+TARG = -bt=dos
+CF = -3 -ml
+ASF = -3rs
+CC = wcc
+else
+TARG = -bt=dos4g
+CF = -3r
+ASF = -3ps -d__USE32
+CC = wcc386
 endif
-CFLAGS = -i=../include -i=h -bt=$(TARG) -3r -d3
-ASFLAGS = -bt=$(TARG) -d__USE32 -3ps -d3
+endif
+CFLAGS = -i=../include -i=h $(TARG) $(CF) -d3
+ASFLAGS = $(TARG) $(ASF) -d3
 LD = wlib
 
 SOURCES = \
