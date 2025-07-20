@@ -1,6 +1,6 @@
 include asmdefs.inc
 
-_DATA SEGMENT BYTE PUBLIC 'DATA'
+__data
 
 PUBLIC _csock_entry
 _csock_entry:

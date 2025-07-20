@@ -6,7 +6,7 @@ else
 TARG = dos4g
 endif
 CFLAGS = -i=../include -i=h -bt=$(TARG) -3r -d3
-ASFLAGS = -bt=$(TARG) -3ps -d3
+ASFLAGS = -bt=$(TARG) -d__USE32 -3ps -d3
 LD = wlib
 
 SOURCES = \

@@ -29,7 +29,18 @@ pop ebp
 ret
 endm
 .text macro
-_TEXT SEGMENT BYTE PUBLIC 'CODE'
+ifdef __USE32
+_TEXT SEGMENT BYTE PUBLIC USE32 'CODE'
+else
+_TEXT SEGMENT BYTE PUBLIC USE16 'CODE'
+endif
+endm
+__data macro
+ifdef __USE32
+_DATA SEGMENT BYTE PUBLIC USE32 'DATA'
+else
+_DATA SEGMENT BYTE PUBLIC USE16 'DATA'
+endif
 endm
 ENDFUNC macro nm
 nm ENDP
