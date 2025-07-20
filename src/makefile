@@ -1,11 +1,11 @@
-CC = owcc
+CC = wcc386
 AS = wasm
 ifneq ($(W16),)
 TARG = WINDOWS_DLL
 else
 TARG = dos4g
 endif
-CFLAGS = -I../include -Ih -b $(TARG) -g3
+CFLAGS = -i=../include -i=h -bt=$(TARG) -3r -d3
 ASFLAGS = -bt=$(TARG) -3ps -d3
 LD = wlib
 
@@ -40,6 +40,9 @@ $(LIB): $(OBJECTS)
 
 .S.o:
 	$(AS) $(ASFLAGS) -fo=$@ $<
+
+.c.o:
+	$(CC) $(CFLAGS) -fo=$@ $<
 
 clean:
 	$(RM) *.o $(LIB)
