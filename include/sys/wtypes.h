@@ -83,6 +83,8 @@ typedef long            int32_t;
   #define FD_ZERO(p)    memset((void*)(p),0,sizeof(*(p)))
 
   typedef uint32_t fd_set;
+#else
+#define FOREIGN_FDSET 1
 #endif
 
 #endif

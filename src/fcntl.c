@@ -10,7 +10,7 @@
 _WCRTLINK int fcntl(int fd, int command, ...)
 {
     int ret = -1;
-    unsigned int x = 1;
+    ULONG32 x = 1;
     int request;
     va_list ap;
 

@@ -1,6 +1,12 @@
 CC = owcc
-CFLAGS = -I../include -Ih -b dos4g -g3
-ASFLAGS = -b dos4g -g3
+AS = wasm
+ifneq ($(W16),)
+TARG = WINDOWS_DLL
+else
+TARG = dos4g
+endif
+CFLAGS = -I../include -Ih -b $(TARG) -g3
+ASFLAGS = -bt=$(TARG) -3ps -d3
 LD = wlib
 
 SOURCES = \
@@ -31,6 +37,9 @@ all: $(LIB)
 
 $(LIB): $(OBJECTS)
 	$(LD) -n $@ $^
+
+.S.o:
+	$(AS) $(ASFLAGS) -fo=$@ $<
 
 clean:
 	$(RM) *.o $(LIB)

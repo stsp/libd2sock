@@ -3,8 +3,8 @@
 
 #include <stdint.h>
 
-#define LONG32 int
-#define ULONG32 unsigned int
+#define LONG32 int32_t
+#define ULONG32 uint32_t
 #define __out
 #define _V_FW(x)
 

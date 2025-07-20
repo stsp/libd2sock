@@ -5,7 +5,7 @@
 #include <sys/ioctl.h>
 #include "csock.h"
 
-_WCRTLINK int ioctlsocket (int fd, int cmd, unsigned int *arg)
+_WCRTLINK int ioctlsocket (int fd, int cmd, uint32_t *arg)
 {
     int ret = -1;
 

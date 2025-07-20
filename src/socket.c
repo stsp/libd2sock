@@ -13,7 +13,7 @@ struct driver_info_rec driver_info;
 int csock_init(void)
 {
     const int CSOCK_VXD_ID = 0x1235;
-    unsigned int __csock_version = 0;
+    ULONG32 __csock_version = 0;
     int ret = VxdGetEntry (/*csock_entry, */CSOCK_VXD_ID);
     if (ret < 0)
         return ret;
@@ -29,7 +29,7 @@ _WCRTLINK int socket( int domain, int type, int protocol )
 {
     int err = 0;
     int proto;
-    unsigned int fd;
+    ULONG32 fd;
 
     if (!initialized) {
         err = csock_init();

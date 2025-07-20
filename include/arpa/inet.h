@@ -39,7 +39,7 @@ _WCRTLINK extern int            inet_aton( const char *__cp, struct in_addr *__o
 _WCRTLINK extern in_addr_t      inet_addr( const char *__cp );
 _WCRTLINK extern in_addr_t      inet_network( const char *__cp );
 _WCRTLINK extern char           *inet_ntoa( struct in_addr __in );
-_WCRTLINK extern struct in_addr inet_makeaddr( int __net, int __host );
+_WCRTLINK extern struct in_addr inet_makeaddr( in_addr_t __net, in_addr_t __host );
 _WCRTLINK extern in_addr_t      inet_lnaof( struct in_addr __in );
 _WCRTLINK extern in_addr_t      inet_netof( struct in_addr __in );
 

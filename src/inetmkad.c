@@ -33,7 +33,7 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 
-_WCRTLINK struct in_addr inet_makeaddr( int net, int __host )
+_WCRTLINK struct in_addr inet_makeaddr( in_addr_t net, in_addr_t __host )
 {
     unsigned long addr;
 
