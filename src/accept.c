@@ -11,8 +11,8 @@ _WCRTLINK int accept(int s, struct sockaddr *addr, socklen_t *addrlen)
 {
     ULONG32 fd;
     int err;
-    unsigned short dest_port    =  0;
-    ULONG32 dest_addr      =  0;
+    ULONG32 dest_port = 0;
+    ULONG32 dest_addr = 0;
     struct sockaddr_in *addr_sa = (struct sockaddr_in *) addr;
 
     err = ___csock_accept(s, &fd, &dest_addr, &dest_port);

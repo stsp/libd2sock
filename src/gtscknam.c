@@ -11,7 +11,7 @@ _WCRTLINK int getsockname( int s , struct sockaddr *name , socklen_t *namelen )
 {
     struct sockaddr_in *sock_sa = (struct sockaddr_in *) name;
     ULONG32 sock_addr = 0;
-    unsigned short sock_port = 0;
+    ULONG32 sock_port = 0;
     int err;
 
     err = ___csock_getsockname(s, &sock_addr, &sock_port);
@@ -31,7 +31,7 @@ _WCRTLINK int getpeername( int s , struct sockaddr *name , socklen_t *namelen )
 {
     struct sockaddr_in *sock_sa = (struct sockaddr_in *) name;
     ULONG32 sock_addr = 0;
-    unsigned short sock_port = 0;
+    ULONG32 sock_port = 0;
     int err;
 
     err = ___csock_getpeername(s, &sock_addr, &sock_port);
