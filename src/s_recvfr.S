@@ -14,11 +14,11 @@ FUNC ____csock_recvfrom
     call_csock
     jc l1                    ; // Jump to label 1 if the carry flag is set (error)
     mov edi, ARG4
-    mov [edi], ecx
+    wptr edi, ecx
     mov edi, ARG5
-    mov [edi], ebx
+    wptr edi, ebx
     mov edi, ARG6
-    mov [edi], edx
+    wptr edi, edx
     xor eax, eax          ; // Clear EAX (set it to 0) on success
 l2:
     _LEAVE

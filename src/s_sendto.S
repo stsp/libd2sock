@@ -16,7 +16,7 @@ FUNC ____csock_sendto
     call_csock
     jc l1                    ; // Jump to label 1 if the carry flag is set (error)
     mov ebx, ARG6
-    mov [ebx], ecx
+    wptr ebx, ecx
     xor eax, eax          ; // Clear EAX (set it to 0) on success
 l2:
     _LEAVE

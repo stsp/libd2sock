@@ -12,7 +12,7 @@ FUNC ____csock_open
     call_csock
     jc l1                    ; // Jump to label 1 if the carry flag is set (error)
     mov ebx, ARG2
-    mov [ebx], edi
+    wptr ebx, edi
     xor eax, eax          ; // Clear EAX (set it to 0) on success
 l2:
     _LEAVE

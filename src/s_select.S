@@ -7,24 +7,24 @@ FUNC ____csock_select
     _ENTER
 
     mov esi, ARG1
-    mov ebx, [esi]
+    rptr ebx, esi
     mov esi, ARG2
-    mov ecx, [esi]
+    rptr ecx, esi
     mov esi, ARG3
-    mov edx, [esi]
+    rptr edx, esi
     mov esi, ARG4
-    mov edi, [esi]
+    rptr edi, esi
     mov eax, 6
     call_csock
     jc l1                    ; // Jump to label 1 if the carry flag is set (error)
     mov esi, ARG1
-    mov [esi], ebx
+    wptr esi, ebx
     mov esi, ARG2
-    mov [esi], ecx
+    wptr esi, ecx
     mov esi, ARG3
-    mov [esi], edx
+    wptr esi, edx
     mov esi, ARG4
-    mov [esi], edi
+    wptr esi, edi
 l2:
     _LEAVE
 l1:
