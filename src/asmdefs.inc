@@ -29,7 +29,6 @@ pop ebp
 ret
 endm
 .text macro
-.386p
 _TEXT SEGMENT BYTE PUBLIC 'CODE'
 endm
 ENDFUNC macro nm
