@@ -1,20 +1,27 @@
 AS = wasm
-ifneq ($(W16),)
+ifeq ($(TARGET),W16)
 TARG = -bt=WINDOWS_DLL
-CF = -3r
+CF = -3
 ASF = -3ps
-CC = wcc386
+CC = wcc
 else
-ifneq ($(D16),)
+ifeq ($(TARGET),D16)
 TARG = -bt=dos
 CF = -3 -ml
 ASF = -3rs
 CC = wcc
 else
+ifeq ($(TARGET),W32)
+TARG = -bt=NT_DLL
+CF = -3r
+ASF = -3ps -d__USE32
+CC = wcc386
+else
 TARG = -bt=dos4g
 CF = -3r
 ASF = -3ps -d__USE32
 CC = wcc386
+endif
 endif
 endif
 CFLAGS = -i=../include -i=h $(TARG) $(CF) -d3
