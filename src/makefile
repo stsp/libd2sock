@@ -1,7 +1,7 @@
 AS = wasm
 ifeq ($(TARGET),W16)
-TARG = -bt=WINDOWS_DLL
-CF = -3 -ml
+TARG = -bt=WINDOWS
+CF = -3 -ml -bd -zc -zw -zu
 ASF = -3ps
 CC = wcc
 else
