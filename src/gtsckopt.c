@@ -31,9 +31,16 @@
 
 
 #include <sys/types.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#define GSO char
+#else
 #include <sys/socket.h>
+#define GSO void
+#endif
+#include "defs.h"
 
-_WCRTLINK int getsockopt( int s, int level, int optname, void *optval, socklen_t *optlen )
+LDECL int CNV getsockopt( SOCKET s, int level, int optname, GSO *optval, socklen_t *optlen )
 {
     /* unused parameters */ (void)s; (void)level; (void)optname; (void)optval; (void)optlen;
 

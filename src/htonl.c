@@ -30,13 +30,18 @@
 
 
 #include <sys/types.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <netinet/in.h>
+#endif
+#include "defs.h"
 
 #ifdef __RDOS__
 #include <rdos.h>
 #endif
 
-_WCRTLINK unsigned long htonl( unsigned long hostlong )
+LDECL unsigned long CNV htonl( unsigned long hostlong )
 {
 #if defined( __RDOS__ )
     return( (unsigned long)RdosSwapLong( hostlong ) );

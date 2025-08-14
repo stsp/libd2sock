@@ -31,14 +31,19 @@
 
 
 #include <sys/types.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <netinet/in.h>
+#endif
+#include "defs.h"
 
 #ifdef __RDOS__
 #include <rdos.h>
 #endif
 
 
-_WCRTLINK unsigned short ntohs( unsigned short netshort )
+LDECL unsigned short CNV ntohs( unsigned short netshort )
 {
 #if defined( __RDOS__ )
     return( (unsigned short)RdosSwapShort( netshort ) );

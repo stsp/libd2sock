@@ -30,9 +30,14 @@
 
 
 #include <sys/types.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <sys/socket.h>
+#endif
+#include "defs.h"
 
-_WCRTLINK int shutdown( int sockfd, int how )
+LDECL int CNV shutdown( SOCKET sockfd, int how )
 /*******************************************/
 {
     /* unused parameters */ (void)sockfd; (void)how;

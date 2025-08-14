@@ -12,7 +12,7 @@
 #endif
 
 #define select(a,b,c,d,e) select_s(a,b,c,d,e)
-int select_s (int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
+int select_s (int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, const struct timeval *timeout);
 
 #endif /* __WATT_SYS_SELECT_H */
 

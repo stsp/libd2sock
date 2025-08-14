@@ -33,13 +33,18 @@
 #include "_resolve.h"
 #include <stdio.h>
 #include <sys/types.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <sys/socket.h>
 #include <arpa/inet.h>
-#include <stdlib.h>
 #include <netdb.h>
+#endif
+#include <stdlib.h>
 #include <string.h>
 #include <errno.h>
 #include "csock.h"
+#include "defs.h"
 
 static struct hostent *__check_hostdb( const char *name )
 {
@@ -113,7 +118,7 @@ static struct hostent *__check_dns_4( const char *name )
     return( NULL );
 }
 
-_WCRTLINK struct hostent *gethostbyname( const char *name )
+LDECL struct hostent * CNV gethostbyname( const char *name )
 {
     static struct hostent   *ret;
     ret = __check_hostdb( name );

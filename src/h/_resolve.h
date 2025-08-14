@@ -31,8 +31,13 @@
 ****************************************************************************/
 
 
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <netinet/in.h>
 #include <netdb.h>
+#endif
+#include "defs.h"
 
 /* Query types for DNS queries */
 #define DNSQ_TYPE_A     1   /* IPv4 Address */

@@ -2,12 +2,21 @@
 /* Sybase Open Watcom Public License */
 
 #include <sys/types.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#define RV char
+#define RL int
+#else
 #include <sys/socket.h>
 #include <netinet/in.h>
+#define RV void
+#define RL size_t
+#endif
 #include <errno.h>
 #include "csock.h"
+#include "defs.h"
 
-_WCRTLINK int recvfrom(int s, void *buf, size_t len, int flags, struct sockaddr *from, socklen_t *fromlen)
+LDECL int CNV recvfrom(SOCKET s, RV *buf, RL len, int flags, struct sockaddr *from, socklen_t *fromlen)
 {
     ULONG32 recvlen;
     ULONG32 port = 0;

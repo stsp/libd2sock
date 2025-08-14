@@ -33,10 +33,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#define GHA char
+#else
 #include <netdb.h>
+#define GHA void
+#endif
 #include <errno.h>
+#include "defs.h"
 
-_WCRTLINK struct hostent *gethostbyaddr(const void *addr, socklen_t len, int type)
+LDECL struct hostent * CNV gethostbyaddr(const GHA *addr, socklen_t len, int type)
 {
     struct hostent *ret;
     int i;

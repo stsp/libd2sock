@@ -38,11 +38,16 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdint.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#endif
 #include <errno.h>
+#include "defs.h"
 #include "_resolve.h"
 
 

@@ -3,8 +3,15 @@
 
 #include <string.h>
 #include <errno.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#define NM select
+#else
 #include <sys/select.h>
+#define NM select_s
+#endif
 #include "csock.h"
+#include "defs.h"
 
 static ULONG32 to_int(fd_set *set)
 {
@@ -33,8 +40,8 @@ static void to_fds(ULONG32 mask, fd_set *set)
     }
 }
 
-_WCRTLINK int select_s (int nfds, fd_set *readfds, fd_set *writefds,
-              fd_set *exceptfds, struct timeval *timeout)
+LDECL int CNV NM (int nfds, fd_set *readfds, fd_set *writefds,
+              fd_set *exceptfds, const struct timeval *timeout)
 {
     ULONG32 to = timeout->tv_sec * 1000000 + timeout->tv_usec;
     ULONG32 _readfds, _writefds, _exceptfds;

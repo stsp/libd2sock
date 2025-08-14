@@ -2,10 +2,15 @@
 /* Sybase Open Watcom Public License */
 
 #include <errno.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <sys/ioctl.h>
+#endif
 #include "csock.h"
+#include "defs.h"
 
-_WCRTLINK int ioctlsocket (int fd, int cmd, uint32_t *arg)
+LDECL int CNV ioctlsocket (SOCKET fd, long cmd, uint32_t *arg)
 {
     int ret = -1;
 

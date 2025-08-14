@@ -2,12 +2,17 @@
 /* Sybase Open Watcom Public License */
 
 #include <sys/types.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <sys/socket.h>
 #include <netinet/in.h>
+#endif
 #include <errno.h>
 #include "csock.h"
+#include "defs.h"
 
-_WCRTLINK int getsockname( int s , struct sockaddr *name , socklen_t *namelen )
+LDECL int CNV getsockname( SOCKET s , struct sockaddr *name , socklen_t *namelen )
 {
     struct sockaddr_in *sock_sa = (struct sockaddr_in *) name;
     ULONG32 sock_addr = 0;
@@ -27,7 +32,7 @@ _WCRTLINK int getsockname( int s , struct sockaddr *name , socklen_t *namelen )
     return 0;
 }
 
-_WCRTLINK int getpeername( int s , struct sockaddr *name , socklen_t *namelen )
+LDECL int CNV getpeername( SOCKET s , struct sockaddr *name , socklen_t *namelen )
 {
     struct sockaddr_in *sock_sa = (struct sockaddr_in *) name;
     ULONG32 sock_addr = 0;

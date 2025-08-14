@@ -33,10 +33,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <netdb.h>
+#endif
 #include <errno.h>
+#include "defs.h"
 
-_WCRTLINK struct protoent *getprotobyname(const char *name)
+LDECL struct protoent * CNV getprotobyname(const char *name)
 {
     struct protoent *ret;
     int i;

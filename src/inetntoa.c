@@ -31,10 +31,15 @@
 
 #include <stdio.h>
 #include <sys/types.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#endif
+#include "defs.h"
 
-_WCRTLINK char *inet_ntoa( struct in_addr in )
+LDECL char * CNV inet_ntoa( struct in_addr in )
 {
     static char buf[ 18 ];
     const unsigned char *addr = (const unsigned char *)&in.s_addr;

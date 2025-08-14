@@ -31,10 +31,15 @@
 
 
 #include <sys/types.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#endif
+#include "defs.h"
 
-_WCRTLINK in_addr_t inet_addr( const char *cp )
+LDECL in_addr_t CNV inet_addr( const char *cp )
 {
     in_addr_t ret;
     in_addr_t val;

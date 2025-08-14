@@ -31,13 +31,18 @@
 
 
 #include <sys/types.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <netinet/in.h>
+#endif
+#include "defs.h"
 
 #ifdef __RDOS__
 #include <rdos.h>
 #endif
 
-_WCRTLINK unsigned short htons( unsigned short hostshort )
+LDECL unsigned short CNV htons( unsigned short hostshort )
 {
 #if defined( __RDOS__ )
     return( (unsigned short)RdosSwapShort( hostshort ) );

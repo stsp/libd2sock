@@ -2,11 +2,16 @@
 /* Sybase Open Watcom Public License */
 
 #include <sys/types.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <sys/socket.h>
+#endif
 #include <errno.h>
 #include "csock.h"
+#include "defs.h"
 
-_WCRTLINK int listen(int s, int backlog)
+LDECL int CNV listen(SOCKET s, int backlog)
 {
     int ret = ___csock_listen(s, backlog);
     if (ret < 0) {

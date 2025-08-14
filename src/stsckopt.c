@@ -31,9 +31,16 @@
 
 
 #include <sys/types.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#define SV char
+#else
 #include <sys/socket.h>
+#define SV void
+#endif
+#include "defs.h"
 
-_WCRTLINK int setsockopt( int s, int level, int optname, const void *optval, socklen_t optlen )
+LDECL int CNV setsockopt( SOCKET s, int level, int optname, const SV *optval, socklen_t optlen )
 {
     /* unused parameters */ (void)s; (void)level; (void)optname; (void)optval; (void)optlen;
 

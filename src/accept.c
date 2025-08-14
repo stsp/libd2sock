@@ -1,13 +1,18 @@
 /* socket lib by @stsp */
 /* Sybase Open Watcom Public License */
 
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#endif
 #include <errno.h>
 #include "csock.h"
+#include "defs.h"
 
-_WCRTLINK int accept(int s, struct sockaddr *addr, socklen_t *addrlen)
+LDECL SOCKET CNV accept(SOCKET s, struct sockaddr *addr, socklen_t *addrlen)
 {
     ULONG32 fd;
     int err;

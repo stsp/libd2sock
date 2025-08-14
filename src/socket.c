@@ -1,11 +1,16 @@
 /* socket lib by @stsp */
 /* Sybase Open Watcom Public License */
 
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#endif
 #include <errno.h>
 #include "csock.h"
+#include "defs.h"
 
 static int initialized;
 struct driver_info_rec driver_info;
@@ -25,7 +30,7 @@ int csock_init(void)
     return 0;
 }
 
-_WCRTLINK int socket( int domain, int type, int protocol )
+LDECL SOCKET CNV socket( int domain, int type, int protocol )
 {
     int err = 0;
     int proto;
@@ -61,7 +66,7 @@ _WCRTLINK int socket( int domain, int type, int protocol )
     return fd;
 }
 
-int closesocket (int s)
+LDECL int CNV closesocket (SOCKET s)
 {
     return ___csock_close(s);
 }

@@ -32,15 +32,20 @@
 
 
 #include <sys/types.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <sys/socket.h>
 #include <netdb.h>
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include "defs.h"
 
 #define SAFE_SAME_STR(x, y)  (x != NULL && y != NULL && strcmp(x,y) == 0)
 
-_WCRTLINK struct servent *getservbyport( int port, const char *proto )
+LDECL struct servent * CNV getservbyport( int port, const char *proto )
 {
     struct servent *ret;
 
