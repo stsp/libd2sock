@@ -8,12 +8,28 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #endif
+#include <assert.h>
 #include <errno.h>
 #include "csock.h"
 #include "defs.h"
 
 static int initialized;
 struct driver_info_rec driver_info;
+struct per_sock psock[MAX_FDS];
+
+static int (far *__blocking_hook)(void);
+
+_WCRTLINK int _blocking_hook(void)
+{
+    if (__blocking_hook)
+        return __blocking_hook();
+    return 1;
+}
+
+_WCRTLINK void _set_blocking_hook(int (far *hook)(void))
+{
+    __blocking_hook = hook;
+}
 
 int csock_init(void)
 {
@@ -63,6 +79,12 @@ LDECL SOCKET CNV socket( int domain, int type, int protocol )
         errno = __csock_errno(err);
         return -1;
     }
+    assert(fd < MAX_FDS);
+    psock[fd].nb = 0;
+
+#ifdef __WINDOWS__
+    ___csock_setnblkio(fd, 1);
+#endif
     return fd;
 }
 

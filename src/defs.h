@@ -20,10 +20,17 @@ _WCRTLINK extern void            endprotoent( void );
 _WCRTLINK extern struct servent  *getservent( void );
 _WCRTLINK extern void            setservent( int __stayopen );
 _WCRTLINK extern void            endservent( void );
+
+_WCRTLINK extern void _set_blocking_hook(int (far *hook)(void));
+_WCRTLINK extern int _blocking_hook( void );
+#define BCALL(r, c, b) do { \
+    r = c; \
+} while ((b) && (r) < 0 && __csock_errno(r) == EAGAIN && _blocking_hook() == 1)
 #else
 #define LDECL _WCRTLINK
 #define CNV
 #define SOCKET int
+#define BCALL(r, c, b) r = c
 #endif
 
 #endif

@@ -9,6 +9,7 @@
 #include <netinet/in.h>
 #endif
 #include <errno.h>
+#include <assert.h>
 #include "csock.h"
 #include "defs.h"
 
@@ -20,7 +21,8 @@ LDECL SOCKET CNV accept(SOCKET s, struct sockaddr *addr, socklen_t *addrlen)
     ULONG32 dest_addr = 0;
     struct sockaddr_in *addr_sa = (struct sockaddr_in *) addr;
 
-    err = ___csock_accept(s, &fd, &dest_addr, &dest_port);
+    assert(s < MAX_FDS);
+    BCALL(err, ___csock_accept(s, &fd, &dest_addr, &dest_port), !psock[s].nb);
     if (err) {
         errno = __csock_errno(err);
         return -1;

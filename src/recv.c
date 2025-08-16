@@ -12,13 +12,17 @@
 #define RL size_t
 #endif
 #include <errno.h>
+#include <assert.h>
 #include "csock.h"
 #include "defs.h"
 
 LDECL int CNV recv( SOCKET s, RV *buf, RL len, int flags )
 {
     ULONG32       recvlen;
-    int ret = ___csock_recv(s, buf, len, &recvlen);
+    int ret;
+
+    assert(s < MAX_FDS);
+    BCALL(ret, ___csock_recv(s, buf, len, &recvlen), !psock[s].nb);
     if (ret < 0) {
         errno = __csock_errno(ret);
         return -1;

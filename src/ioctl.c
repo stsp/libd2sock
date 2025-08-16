@@ -16,7 +16,12 @@ LDECL int CNV ioctlsocket (SOCKET fd, long cmd, uint32_t *arg)
 
     switch (cmd) {
     case FIONBIO:
+        psock[fd].nb = *arg;
+#ifndef __WINDOWS__
         ret = ___csock_setnblkio(fd, *arg);
+#else
+        ret = 0;
+#endif
         break;
     case FIONREAD:
         ret = ___csock_fionread(fd, arg);

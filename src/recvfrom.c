@@ -13,6 +13,7 @@
 #define RL size_t
 #endif
 #include <errno.h>
+#include <assert.h>
 #include "csock.h"
 #include "defs.h"
 
@@ -21,8 +22,11 @@ LDECL int CNV recvfrom(SOCKET s, RV *buf, RL len, int flags, struct sockaddr *fr
     ULONG32 recvlen;
     ULONG32 port = 0;
     struct sockaddr_in *from_sa = (struct sockaddr_in *) from;
-    int ret = ___csock_recvfrom(s, buf, len, &recvlen,
-            &from_sa->sin_addr.s_addr, &port);
+    int ret;
+
+    assert(s < MAX_FDS);
+    BCALL(ret, ___csock_recvfrom(s, buf, len, &recvlen,
+            &from_sa->sin_addr.s_addr, &port), !psock[s].nb);
     if (ret < 0) {
         errno = __csock_errno(ret);
         return -1;
