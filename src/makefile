@@ -4,6 +4,7 @@ vpath %.S ..
 
 AS = wasm
 ifeq ($(TARGET),W16)
+CFLAGS = -I$(WATCOM)/h/win
 TARG = -bt=WINDOWS
 CF = -3 -ml -bd -zc -zw -zu
 ASF = -3ps
@@ -34,7 +35,7 @@ endif
 endif
 endif
 endif
-CFLAGS = -i=../include -i=h $(TARG) $(CF) -d3
+CFLAGS += -i=../include -i=h $(TARG) $(CF) -d3
 ASFLAGS = $(TARG) $(ASF) -d3
 LD = wlib
 
