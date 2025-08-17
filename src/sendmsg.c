@@ -30,7 +30,12 @@
 
 
 #include <sys/types.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <sys/socket.h>
+#endif
+#include "defs.h"
 
 _WCRTLINK int sendmsg( int s, const struct msghdr *msg, int flags )
 {

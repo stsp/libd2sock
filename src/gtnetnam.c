@@ -33,8 +33,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <netdb.h>
+#endif
 #include <errno.h>
+#include "defs.h"
 
 _WCRTLINK struct netent *getnetbyname(const char *name)
 {

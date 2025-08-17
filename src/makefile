@@ -43,7 +43,7 @@ SOURCES = \
 accept.c    gtpronam.c  inetnet.c   shutdown.c \
 bind.c      gtpronum.c  inetneto.c  gethname.c \
 gtscknam.c  inetntoa.c  select.c \
-gtsckopt.c  gaddrinf.c  presaddr.c \
+gtsckopt.c  presaddr.c \
 connect.c   gtsrvent.c  listen.c \
 gtsrvnam.c  ntohl.c     c_errors.c \
 gtsrvprt.c  ntohs.c     recv.c      socket.c \
@@ -54,6 +54,9 @@ gtnetadr.c  inetaddr.c  fcntl.c     ioctl.c \
 gtnetent.c  inetaton.c  send.c \
 gtnetnam.c  inetlnof.c  sendmsg.c \
 gtproent.c  inetmkad.c  sendto.c
+ifneq ($(TARGET),W16)
+SOURCES += gaddrinf.c
+endif
 
 ASM_SOURCES = \
 s_fnread.S  s_close.S   s_gprnm.S   s_listen.S  s_select.S  s_snblk.S \

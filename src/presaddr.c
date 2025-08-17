@@ -19,9 +19,14 @@
 
 #include <stdio.h>
 #include <string.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#endif
+#include "defs.h"
 #include <errno.h>
 
 #define SOCK_ERR(x) errno = x

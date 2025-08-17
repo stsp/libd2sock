@@ -32,8 +32,13 @@
 
 #include <stdio.h>
 #include <sys/types.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#endif
+#include "defs.h"
 
 _WCRTLINK int inet_aton( const char *cp, struct in_addr *op )
 {

@@ -30,8 +30,13 @@
 ****************************************************************************/
 
 #include <sys/types.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#endif
+#include "defs.h"
 
 _WCRTLINK struct in_addr inet_makeaddr( in_addr_t net, in_addr_t __host )
 {

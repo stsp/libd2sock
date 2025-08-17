@@ -32,8 +32,13 @@
 
 #include <stdio.h>
 #include <sys/types.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#endif
+#include "defs.h"
 
 _WCRTLINK in_addr_t inet_lnaof( struct in_addr in )
 {

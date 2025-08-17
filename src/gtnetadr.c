@@ -33,7 +33,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef __WINDOWS__
+#include <winsock.h>
+#else
 #include <netdb.h>
+#endif
+#include "defs.h"
 
 _WCRTLINK struct netent *getnetbyaddr(uint32_t naddr, int type)
 {

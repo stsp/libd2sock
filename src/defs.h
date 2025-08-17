@@ -4,6 +4,7 @@
 #ifdef __WINDOWS__
 #include <stdint.h>
 #include <stddef.h>
+#define INET_ADDRSTRLEN 16
 #define LDECL
 #define CNV far pascal
 #define socklen_t int
