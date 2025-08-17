@@ -22,7 +22,8 @@ LDECL int CNV recv( SOCKET s, RV *buf, RL len, int flags )
     int ret;
 
     assert(s < MAX_FDS);
-    BCALL(ret, ___csock_recv(s, buf, len, &recvlen), !psock[s].nb);
+    BCALL(ret, ___csock_recv(s, buf, len, &recvlen),
+            !(psock[s].nb || (flags & MSG_DONTWAIT)));
     if (ret < 0) {
         errno = __csock_errno(ret);
         return -1;

@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #define INET_ADDRSTRLEN 16
+#define MSG_DONTWAIT 0x40
 #define LDECL
 #define CNV far pascal
 #define socklen_t int

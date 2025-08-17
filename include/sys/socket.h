@@ -124,6 +124,8 @@ struct linger {
 
 #define SOL_SOCKET      0xffff
 
+#define MSG_DONTWAIT    0x40
+
 typedef unsigned int socklen_t;
 
 _WCRTLINK extern int socket( int __domain, int __type, int __protocol );
