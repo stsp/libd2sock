@@ -43,14 +43,23 @@ static void to_fds(ULONG32 mask, fd_set *set)
 LDECL int CNV NM (int nfds, fd_set *readfds, fd_set *writefds,
               fd_set *exceptfds, const struct timeval *timeout)
 {
-    ULONG32 to = timeout->tv_sec * 1000000 + timeout->tv_usec;
+#ifdef __WINDOWS__
+    ULONG32 expi = timeout ? timeout->tv_sec * 1000 + timeout->tv_usec / 1000 :
+            0xffffffff;
+    ULONG32 start = (timeout && expi) ? GetTickCount() : 0;
+    ULONG32 to = 0;
+#else
+    ULONG32 to = timeout ? timeout->tv_sec * 1000000 + timeout->tv_usec :
+            0xffffffff;
+#endif
     ULONG32 _readfds, _writefds, _exceptfds;
     int ret;
 
     _readfds = to_int(readfds);
     _writefds = to_int(writefds);
     _exceptfds = to_int(exceptfds);
-    ret = ___csock_select(&_readfds, &_writefds, &_exceptfds, &to);
+    BCALL_TO(ret, ___csock_select(&_readfds, &_writefds, &_exceptfds, &to),
+            start, expi);
     if (ret < 0) {
         errno = __csock_errno (ret);
         return -1;
