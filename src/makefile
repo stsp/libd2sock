@@ -41,7 +41,7 @@ LD = wlib
 
 SOURCES = \
 accept.c    gtpronam.c  inetnet.c   shutdown.c \
-bind.c      gtpronum.c  inetneto.c \
+bind.c      gtpronum.c  inetneto.c  gethname.c \
 gtscknam.c  inetntoa.c  select.c \
 gtsckopt.c  gaddrinf.c  presaddr.c \
 connect.c   gtsrvent.c  listen.c \

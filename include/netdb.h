@@ -111,6 +111,8 @@ _WCRTLINK int getaddrinfo(const char *host, const char *serv,
     const struct addrinfo *hint, struct addrinfo **res);
 _WCRTLINK void freeaddrinfo(struct addrinfo *res);
 
+_WCRTLINK extern int        gethostname( char *__name, size_t __len );
+
 _WCRTLINK extern void            herror( const char *__s );
 _WCRTLINK extern const char      *hstrerror( int __err );
 
