@@ -1,3 +1,7 @@
+TARGET = $(lastword $(subst /, ,$(CURDIR)))
+vpath %.c ..
+vpath %.S ..
+
 AS = wasm
 ifeq ($(TARGET),W16)
 TARG = -bt=WINDOWS
@@ -17,10 +21,16 @@ CF = -3r
 ASF = -3ps -d__USE32
 CC = wcc386
 else
+ifeq ($(TARGET),D32)
 TARG = -bt=dos4g
 CF = -3r
 ASF = -3ps -d__USE32
 CC = wcc386
+else
+ifeq ($(filter clean,$(MAKECMDGOALS)),)
+$(error unsupported target $(TARGET))
+endif
+endif
 endif
 endif
 endif
@@ -50,7 +60,7 @@ s_accept.S  s_connct.S  s_gscknm.S  s_recvfr.S  s_send.S    s_socket.S \
 s_bind.S    s_gnblk.S   s_initnt.S  s_recv.S    s_sendto.S  vxd.S
 
 OBJECTS = $(SOURCES:.c=.o) $(ASM_SOURCES:.S=.o)
-LIB = libcsock.lib
+LIB = libd2sock.lib
 
 all: $(LIB)
 

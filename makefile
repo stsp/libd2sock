@@ -1,7 +1,10 @@
-all: src/libcsock.a
+TARGETS = W16 W32 D16 D32
+LIB = libd2sock.a
+TARG = $(foreach T,$(TARGETS),src/$(T)/$(LIB))
+all: $(TARG)
 
-src/libcsock.a:
-	$(MAKE) -C src
+src/%/$(LIB):
+	$(MAKE) -C $(dir $@)
 
 clean:
-	$(MAKE) -C src clean
+	$(foreach T,$(TARGETS),$(MAKE) -C src/$(T) clean;)
