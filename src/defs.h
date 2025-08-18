@@ -22,6 +22,7 @@ _WCRTLINK extern void            endprotoent( void );
 _WCRTLINK extern struct servent  *getservent( void );
 _WCRTLINK extern void            setservent( int __stayopen );
 _WCRTLINK extern void            endservent( void );
+_WCRTLINK extern void            freehostent(struct hostent *he);
 
 _WCRTLINK extern void _set_blocking_hook(int (far *hook)(void));
 _WCRTLINK extern int _blocking_hook( void );

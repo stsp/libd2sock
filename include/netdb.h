@@ -106,6 +106,7 @@ _WCRTLINK extern struct hostent  *gethostbyaddr( const void *__addr, socklen_t _
 _WCRTLINK extern struct hostent  *gethostent(void);
 _WCRTLINK extern void            sethostent( int __stayopen );
 _WCRTLINK extern void            endhostent( void );
+_WCRTLINK extern void            freehostent(struct hostent *he);
 
 _WCRTLINK int getaddrinfo(const char *host, const char *serv,
     const struct addrinfo *hint, struct addrinfo **res);

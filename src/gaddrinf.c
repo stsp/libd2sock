@@ -30,6 +30,7 @@ _WCRTLINK int getaddrinfo(const char *host, const char *serv,
 	ret->ai_addr = (struct sockaddr *)sin;
 	ret->ai_canonname = strdup(h->h_name);
 	ret->ai_next = NULL;
+	freehostent(h);
 	*res = ret;
 	return 0;
 }

@@ -46,6 +46,7 @@
 #include "csock.h"
 #include "defs.h"
 
+#if 0
 static struct hostent *__check_hostdb( const char *name )
 {
     int             i;
@@ -70,6 +71,7 @@ static struct hostent *__check_hostdb( const char *name )
     }
     return( one );
 }
+#endif
 
 /* Messy function for retrieving the "last" indexed nameserver
  * from the DNS resolution config file
@@ -91,7 +93,12 @@ static struct hostent *__check_dns_4( const char *name )
     in_addr_t               dnsaddr;
     int                     servercount;
     int                     dns_success;
+#if 0
     static struct hostent   ret;
+#else
+    struct hostent *_ret = malloc(sizeof(*_ret));
+    #define ret (*_ret)
+#endif
 
     dns_success = 0;
     for( servercount = 0; __get_nameserver( servercount, &dnsaddr ); servercount++ ) {
@@ -121,8 +128,21 @@ static struct hostent *__check_dns_4( const char *name )
 LDECL struct hostent * CNV gethostbyname( const char *name )
 {
     static struct hostent   *ret;
-    ret = __check_hostdb( name );
-    if( ret == NULL )
+//    ret = __check_hostdb( name );
+//    if( ret == NULL )
         ret = __check_dns_4( name );
     return( ret );
+}
+
+_WCRTLINK void freehostent(struct hostent *he)
+{
+    char **h;
+    free(he->h_name);
+    for (h = he->h_aliases; *h; h++)
+        free(*h);
+    free(he->h_aliases);
+    for (h = he->h_addr_list; *h; h++)
+        free(*h);
+    free(he->h_addr_list);
+    free(he);
 }
