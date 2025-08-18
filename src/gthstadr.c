@@ -45,6 +45,8 @@
 
 LDECL struct hostent * CNV gethostbyaddr(const GHA *addr, socklen_t len, int type)
 {
+    /* this should do reverse DNS lookup, but code below does nothing */
+#if 0
     struct hostent *ret;
     int i;
     int cont;
@@ -71,4 +73,7 @@ LDECL struct hostent * CNV gethostbyaddr(const GHA *addr, socklen_t len, int typ
     endhostent();
 
     return( ret );
+#else
+    return NULL;
+#endif
 }
