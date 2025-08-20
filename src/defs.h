@@ -36,12 +36,16 @@ _WCRTLINK extern int _blocking_hook( void );
           ((s) && (GetTickCount() < (s) + (e))) \
          ) && \
         (r) < 0 && __csock_errno(r) == EAGAIN && _blocking_hook() == 1)
+
+void debug_out(const char *msg);
+#define _ENT() debug_out("enter: " __FUNCTION__ "\r\n")
 #else
 #define LDECL _WCRTLINK
 #define CNV
 #define SOCKET int
 #define BCALL(r, c, b) r = c
 #define BCALL_TO(r, c, s, e) r = c
+#define _ENT()
 #endif
 
 #endif

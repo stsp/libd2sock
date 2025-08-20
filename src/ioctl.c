@@ -14,6 +14,7 @@ LDECL int CNV ioctlsocket (SOCKET fd, long cmd, uint32_t *arg)
 {
     int ret = -1;
 
+    _ENT();
     switch (cmd) {
     case FIONBIO:
         psock[fd].nb = *arg;

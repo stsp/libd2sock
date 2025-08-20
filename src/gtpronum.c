@@ -44,6 +44,7 @@ LDECL struct protoent * CNV getprotobynumber( int proto )
 {
     struct protoent *ret;
 
+    _ENT();
     setprotoent( 1 );
 
     ret = getprotoent();

@@ -55,6 +55,7 @@ LDECL int CNV NM (int nfds, fd_set *readfds, fd_set *writefds,
     ULONG32 _readfds, _writefds, _exceptfds;
     int ret;
 
+    _ENT();
     _readfds = to_int(readfds);
     _writefds = to_int(writefds);
     _exceptfds = to_int(exceptfds);

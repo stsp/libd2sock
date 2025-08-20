@@ -15,6 +15,7 @@
 
 LDECL int CNV gethostname( char *__name, GNL __len )
 {
+    _ENT();
     strlcpy( __name, driver_info.domain, __len );
     return( 0 );
 }

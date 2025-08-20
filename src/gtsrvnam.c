@@ -49,6 +49,7 @@ LDECL struct servent * CNV getservbyname( const char *name, const char *proto )
 {
     struct servent *ret;
 
+    _ENT();
     if( name == NULL ) {
         errno = EINVAL;
         return( NULL );

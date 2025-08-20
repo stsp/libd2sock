@@ -24,6 +24,7 @@ LDECL int CNV recvfrom(SOCKET s, RV *buf, RL len, int flags, struct sockaddr *fr
     struct sockaddr_in *from_sa = (struct sockaddr_in *) from;
     int ret;
 
+    _ENT();
     assert(s < MAX_FDS);
     BCALL(ret, ___csock_recvfrom(s, buf, len, &recvlen,
             &from_sa->sin_addr.s_addr, &port),

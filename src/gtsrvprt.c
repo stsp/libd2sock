@@ -49,6 +49,7 @@ LDECL struct servent * CNV getservbyport( int port, const char *proto )
 {
     struct servent *ret;
 
+    _ENT();
     if( port < 1 ) {
         errno = EINVAL;
         return( NULL );

@@ -20,7 +20,10 @@ LDECL int CNV sendto( SOCKET s, const SV *msg, SL len, int flags, const struct s
 {
     ULONG32 sentlen;
     struct sockaddr_in *to_sa = (struct sockaddr_in *) to;
-    int ret = ___csock_sendto(s, to_sa->sin_addr.s_addr,
+    int ret;
+
+    _ENT();
+    ret = ___csock_sendto(s, to_sa->sin_addr.s_addr,
             to_sa->sin_port, msg, len, &sentlen);
     if (ret < 0) {
         errno = __csock_errno(ret);

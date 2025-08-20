@@ -129,6 +129,8 @@ static struct hostent *__check_dns_4( const char *name )
 LDECL struct hostent * CNV gethostbyname( const char *name )
 {
     struct hostent *ret;
+
+    _ENT();
 //    ret = __check_hostdb( name );
 //    if( ret == NULL )
         ret = __check_dns_4( name );

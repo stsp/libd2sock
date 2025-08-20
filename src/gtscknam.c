@@ -19,6 +19,7 @@ LDECL int CNV getsockname( SOCKET s , struct sockaddr *name , socklen_t *namelen
     ULONG32 sock_port = 0;
     int err;
 
+    _ENT();
     err = ___csock_getsockname(s, &sock_addr, &sock_port);
     if (err) {
         errno = __csock_errno(err);

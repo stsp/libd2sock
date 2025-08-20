@@ -46,6 +46,7 @@ LDECL struct protoent * CNV getprotobyname(const char *name)
     struct protoent *ret;
     int i;
 
+    _ENT();
     if( name == NULL ) {
         errno = EINVAL;
         return( NULL );

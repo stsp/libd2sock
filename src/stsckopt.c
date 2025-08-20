@@ -44,5 +44,6 @@ LDECL int CNV setsockopt( SOCKET s, int level, int optname, const SV *optval, so
 {
     /* unused parameters */ (void)s; (void)level; (void)optname; (void)optval; (void)optlen;
 
+    _ENT();
     return( -1 );
 }

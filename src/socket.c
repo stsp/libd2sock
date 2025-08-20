@@ -52,6 +52,7 @@ LDECL SOCKET CNV socket( int domain, int type, int protocol )
     int proto;
     ULONG32 fd;
 
+    _ENT();
     if (!initialized) {
         err = csock_init();
         initialized++;

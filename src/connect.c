@@ -18,6 +18,7 @@ LDECL int CNV connect(SOCKET s, const struct sockaddr *serv_addr, socklen_t addr
     struct sockaddr_in *sai = (struct sockaddr_in *) serv_addr;
     int ret;
 
+    _ENT();
     assert(s < MAX_FDS);
     BCALL(ret, ___csock_connect(s, sai->sin_addr.s_addr, sai->sin_port),
             !psock[s].nb);
