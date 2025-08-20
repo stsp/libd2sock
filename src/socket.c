@@ -18,6 +18,7 @@ struct driver_info_rec driver_info;
 struct per_sock psock[MAX_FDS];
 
 static int (far *__blocking_hook)(void);
+static void (far *__debug_hook)(const char *);
 
 _WCRTLINK int _blocking_hook(void)
 {
@@ -29,6 +30,17 @@ _WCRTLINK int _blocking_hook(void)
 _WCRTLINK void _set_blocking_hook(int (far *hook)(void))
 {
     __blocking_hook = hook;
+}
+
+_WCRTLINK void _debug_out(const char *msg)
+{
+    if (__debug_hook)
+        __debug_hook(msg);
+}
+
+_WCRTLINK void _set_debug_hook(void (far *hook)(const char *))
+{
+    __debug_hook = hook;
 }
 
 int csock_init(void)

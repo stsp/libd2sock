@@ -37,15 +37,21 @@ _WCRTLINK extern int _blocking_hook( void );
          ) && \
         (r) < 0 && __csock_errno(r) == EAGAIN && _blocking_hook() == 1)
 
-void debug_out(const char *msg);
-#define _ENT() debug_out("enter: " __FUNCTION__ "\r\n")
 #else
 #define LDECL _WCRTLINK
 #define CNV
 #define SOCKET int
 #define BCALL(r, c, b) r = c
 #define BCALL_TO(r, c, s, e) r = c
-#define _ENT()
 #endif
+
+_WCRTLINK void _set_debug_hook(void (far *hook)(const char *));
+_WCRTLINK void _debug_out(const char *msg);
+#define _ENT() _debug_out("enter: " __FUNCTION__ "\r\n")
+#define DEBUG_STR(...) { \
+	char _buf[128]; \
+	snprintf(_buf, sizeof(_buf), __VA_ARGS__); \
+	_debug_out(_buf); \
+}
 
 #endif
