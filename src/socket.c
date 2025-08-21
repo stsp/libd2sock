@@ -67,7 +67,8 @@ LDECL SOCKET CNV socket( int domain, int type, int protocol )
     _ENT();
     if (!initialized) {
         err = csock_init();
-        initialized++;
+        if (!err)
+            initialized++;
     }
     if (err)
         return err;
