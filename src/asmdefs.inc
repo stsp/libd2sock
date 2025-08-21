@@ -29,7 +29,11 @@ endm
 
 _ENTER macro
 push ebp
+ifdef __USE32
 mov ebp, esp
+else
+movzx ebp, sp
+endif
 endm
 
 _LEAVE macro
