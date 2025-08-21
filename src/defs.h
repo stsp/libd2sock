@@ -1,6 +1,7 @@
 #ifndef DEFS_H
 #define DEFS_H
 
+#include <stdio.h>
 #ifdef __WINDOWS__
 #include <stdint.h>
 #include <stddef.h>
@@ -22,6 +23,9 @@ _WCRTLINK extern void            endprotoent( void );
 _WCRTLINK extern struct servent  *getservent( void );
 _WCRTLINK extern void            setservent( int __stayopen );
 _WCRTLINK extern void            endservent( void );
+_WCRTLINK extern struct netent   *getnetent( void );
+_WCRTLINK extern void            setnetent( int __stayopen );
+_WCRTLINK extern void            endnetent( void );
 _WCRTLINK extern void            freehostent(struct hostent *he);
 
 _WCRTLINK extern void _set_blocking_hook(int (far *hook)(void));
