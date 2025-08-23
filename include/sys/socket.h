@@ -125,6 +125,7 @@ struct linger {
 #define SOL_SOCKET      0xffff
 
 #define SO_ERROR        1
+#define SO_LINGER       2
 #define ENOPROTOOPT     EINVAL
 
 #define MSG_DONTWAIT    0x40

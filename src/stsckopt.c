@@ -38,12 +38,30 @@
 #include <sys/socket.h>
 #define SV void
 #endif
+#include <errno.h>
+#include <assert.h>
+#include "csock.h"
 #include "defs.h"
 
 LDECL int CNV setsockopt( SOCKET s, int level, int optname, const SV *optval, socklen_t optlen )
 {
-    /* unused parameters */ (void)s; (void)level; (void)optname; (void)optval; (void)optlen;
-
     _ENT();
-    return( -1 );
+    if (level != SOL_SOCKET)
+        return -1;
+    switch (optname) {
+        case SO_LINGER: {
+            int rc;
+            const struct linger *lin = (const struct linger *)optval;
+            assert(optlen == sizeof(*lin));
+            rc = ___csock_setsolinger(s, lin->l_onoff, lin->l_linger);
+            if (rc) {
+                errno = __csock_errno(rc);
+                return -1;
+            }
+            return 0;
+        }
+    }
+
+    errno = ENOPROTOOPT;
+    return -1;
 }

@@ -53,9 +53,12 @@ LDECL int CNV getsockopt( SOCKET s, int level, int optname, GSO *optval, socklen
             int ret;
             assert(*optlen == 2 || *optlen == 4);
             ret = ___csock_getsoerr(s, &val);
-            if (!ret)
+            if (!ret) {
                 memcpy(optval, &val, *optlen);
-            return ret;
+                return 0;
+            }
+            errno = __csock_errno(ret);
+            return -1;
         }
     }
 
