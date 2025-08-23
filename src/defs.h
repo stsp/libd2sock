@@ -10,6 +10,7 @@
 #define LDECL
 #define CNV far pascal
 #define socklen_t int
+#define ENOPROTOOPT WSAENOPROTOOPT
 #undef h_errno
 _WCRTDATA extern int h_errno;
 typedef uint32_t in_addr_t;

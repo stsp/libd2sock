@@ -38,11 +38,27 @@
 #include <sys/socket.h>
 #define GSO void
 #endif
+#include <errno.h>
+#include <assert.h>
+#include "csock.h"
 #include "defs.h"
 
 LDECL int CNV getsockopt( SOCKET s, int level, int optname, GSO *optval, socklen_t *optlen )
 {
-    /* unused parameters */ (void)s; (void)level; (void)optname; (void)optval; (void)optlen;
+    if (level != SOL_SOCKET)
+        return -1;
+    switch (optname) {
+        case SO_ERROR: {
+            ULONG32 val;
+            int ret;
+            assert(*optlen == 2 || *optlen == 4);
+            ret = ___csock_getsoerr(s, &val);
+            if (!ret)
+                memcpy(optval, &val, *optlen);
+            return ret;
+        }
+    }
 
-    return( -1 );
+    errno = ENOPROTOOPT;
+    return -1;
 }

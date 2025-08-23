@@ -124,6 +124,9 @@ struct linger {
 
 #define SOL_SOCKET      0xffff
 
+#define SO_ERROR        1
+#define ENOPROTOOPT     EINVAL
+
 #define MSG_DONTWAIT    0x40
 
 typedef unsigned int socklen_t;
