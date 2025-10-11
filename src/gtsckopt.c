@@ -29,7 +29,7 @@
 *
 ****************************************************************************/
 
-
+#include <string.h>
 #include <sys/types.h>
 #ifdef __WINDOWS__
 #include <winsock.h>
