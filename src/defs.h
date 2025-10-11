@@ -28,26 +28,27 @@ _WCRTLINK extern struct netent   *getnetent( void );
 _WCRTLINK extern void            setnetent( int __stayopen );
 _WCRTLINK extern void            endnetent( void );
 _WCRTLINK extern void            freehostent(struct hostent *he);
+_WCRTLINK extern struct hostent  *gethostbyname_ex( const char *__name, void *arg );
 
-_WCRTLINK extern void _set_blocking_hook(int (far *hook)(void));
-_WCRTLINK extern int _blocking_hook( void );
-#define BCALL(r, c, b) do { \
+_WCRTLINK extern void _set_blocking_hook(int (far *hook)(void *arg));
+_WCRTLINK extern int _blocking_hook( void *arg );
+#define BCALL(r, c, b, a) do { \
     r = c; \
-} while ((b) && (r) < 0 && __csock_errno(r) == EAGAIN && _blocking_hook() == 1)
-#define BCALL_TO(r, c, s, e) do { \
+} while ((b) && (r) < 0 && __csock_errno(r) == EAGAIN && _blocking_hook(a) == 1)
+#define BCALL_TO(r, c, s, e, a) do { \
     r = c; \
 } while (( \
           ((e) == 0xffffffff) || \
           ((s) && (GetTickCount() < (s) + (e))) \
          ) && \
-        (r) < 0 && __csock_errno(r) == EAGAIN && _blocking_hook() == 1)
+        (r) < 0 && __csock_errno(r) == EAGAIN && _blocking_hook(a) == 1)
 
 #else
 #define LDECL _WCRTLINK
 #define CNV
 #define SOCKET int
-#define BCALL(r, c, b) r = c
-#define BCALL_TO(r, c, s, e) r = c
+#define BCALL(r, c, b, a) r = c
+#define BCALL_TO(r, c, s, e, a) r = c
 #endif
 
 _WCRTLINK void _set_debug_hook(void (far *hook)(const char *));
@@ -58,5 +59,7 @@ _WCRTLINK void _debug_out(const char *msg);
 	snprintf(_buf, sizeof(_buf), __VA_ARGS__); \
 	_debug_out(_buf); \
 }
+
+void set_blk_arg(int fd, void *arg);
 
 #endif

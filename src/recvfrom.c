@@ -28,7 +28,7 @@ LDECL int CNV recvfrom(SOCKET s, RV *buf, RL len, int flags, struct sockaddr *fr
     assert(s < MAX_FDS);
     BCALL(ret, ___csock_recvfrom(s, buf, len, &recvlen,
             &from_sa->sin_addr.s_addr, &port),
-            !(psock[s].nb || (flags & MSG_DONTWAIT)));
+            !(psock[s].nb || (flags & MSG_DONTWAIT)), psock[s].blk_arg);
     if (ret < 0) {
         errno = __csock_errno(ret);
         return -1;

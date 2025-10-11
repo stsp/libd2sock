@@ -21,7 +21,7 @@ LDECL int CNV connect(SOCKET s, const struct sockaddr *serv_addr, socklen_t addr
     _ENT();
     assert(s < MAX_FDS);
     BCALL(ret, ___csock_connect(s, sai->sin_addr.s_addr, sai->sin_port),
-            !psock[s].nb);
+            !psock[s].nb, psock[s].blk_arg);
     if (ret < 0) {
         errno = __csock_errno(ret);
         return -1;

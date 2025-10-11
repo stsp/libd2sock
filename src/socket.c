@@ -17,17 +17,17 @@ static int initialized;
 struct driver_info_rec driver_info;
 struct per_sock psock[MAX_FDS];
 
-static int (far *__blocking_hook)(void);
+static int (far *__blocking_hook)(void *);
 static void (far *__debug_hook)(const char *);
 
-_WCRTLINK int _blocking_hook(void)
+_WCRTLINK int _blocking_hook(void *arg)
 {
     if (__blocking_hook)
-        return __blocking_hook();
+        return __blocking_hook(arg);
     return 1;
 }
 
-_WCRTLINK void _set_blocking_hook(int (far *hook)(void))
+_WCRTLINK void _set_blocking_hook(int (far *hook)(void *))
 {
     __blocking_hook = hook;
 }
@@ -95,6 +95,7 @@ LDECL SOCKET CNV socket( int domain, int type, int protocol )
     }
     assert(fd < MAX_FDS);
     psock[fd].nb = 0;
+    psock[fd].blk_arg = NULL;
 
 #ifdef __WINDOWS__
     ___csock_setnblkio(fd, 1);
@@ -105,4 +106,10 @@ LDECL SOCKET CNV socket( int domain, int type, int protocol )
 LDECL int CNV closesocket (SOCKET s)
 {
     return ___csock_close(s);
+}
+
+void set_blk_arg(int fd, void *arg)
+{
+    assert(fd < MAX_FDS);
+    psock[fd].blk_arg = arg;
 }

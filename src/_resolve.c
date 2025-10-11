@@ -204,7 +204,8 @@ static char **_add_address_to_list( char **addr_list, struct in_addr *addr )
     return( _add_string_to_list( addr_list, allocated_address ) );
 }
 
-int _dns_query( const char *name, int query_type, in_addr_t dnsaddr, struct hostent *res )
+int _dns_query( const char *name, int query_type, in_addr_t dnsaddr,
+        struct hostent *res, void *arg )
 {
     char            *buf, *query_name, *reader;
     int             query_socket = -1;
@@ -237,6 +238,7 @@ int _dns_query( const char *name, int query_type, in_addr_t dnsaddr, struct host
     answers = NULL;
 
     query_socket = socket( AF_INET , SOCK_DGRAM , IPPROTO_UDP ); //UDP packet for DNS queries
+    set_blk_arg(query_socket, arg);
 
     dest.sin_family = AF_INET;
     dest.sin_port = htons( 53 );    // dns service port

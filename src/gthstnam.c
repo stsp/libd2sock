@@ -88,7 +88,7 @@ static int __get_nameserver( int last, in_addr_t *dnsaddr )
     return 1;
 }
 
-static struct hostent *__check_dns_4( const char *name )
+static struct hostent *__check_dns_4( const char *name, void *arg )
 {
     in_addr_t               dnsaddr;
     int                     servercount;
@@ -102,7 +102,7 @@ static struct hostent *__check_dns_4( const char *name )
 
     dns_success = 0;
     for( servercount = 0; __get_nameserver( servercount, &dnsaddr ); servercount++ ) {
-        dns_success = _dns_query( name, DNSQ_TYPE_A, dnsaddr, &ret );
+        dns_success = _dns_query( name, DNSQ_TYPE_A, dnsaddr, &ret, arg );
         if( dns_success > 0 ) {
             return( &ret );
         }
@@ -133,8 +133,14 @@ LDECL struct hostent * CNV gethostbyname( const char *name )
     _ENT();
 //    ret = __check_hostdb( name );
 //    if( ret == NULL )
-        ret = __check_dns_4( name );
+        ret = __check_dns_4( name, NULL );
     return( ret );
+}
+
+_WCRTLINK struct hostent *gethostbyname_ex( const char *name, void *arg )
+{
+    _ENT();
+    return __check_dns_4(name, arg);
 }
 
 _WCRTLINK void freehostent(struct hostent *he)

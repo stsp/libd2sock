@@ -102,6 +102,7 @@ _WCRTLINK extern void            setservent( int __stayopen );
 _WCRTLINK extern void            endservent( void );
 
 _WCRTLINK extern struct hostent  *gethostbyname( const char *__name );
+_WCRTLINK extern struct hostent  *gethostbyname_ex( const char *__name, void *arg );
 _WCRTLINK extern struct hostent  *gethostbyaddr( const void *__addr, socklen_t __len, int __type );
 _WCRTLINK extern struct hostent  *gethostent(void);
 _WCRTLINK extern void            sethostent( int __stayopen );

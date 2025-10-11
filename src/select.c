@@ -60,7 +60,7 @@ LDECL int CNV NM (int nfds, fd_set *readfds, fd_set *writefds,
     _writefds = to_int(writefds);
     _exceptfds = to_int(exceptfds);
     BCALL_TO(ret, ___csock_select(&_readfds, &_writefds, &_exceptfds, &to),
-            start, expi);
+            start, expi, NULL);
     if (ret < 0) {
         errno = __csock_errno (ret);
         return -1;
