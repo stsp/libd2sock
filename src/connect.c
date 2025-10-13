@@ -24,6 +24,7 @@ LDECL int CNV connect(SOCKET s, const struct sockaddr *serv_addr, socklen_t addr
             !psock[s].nb, psock[s].blk_arg);
     if (ret < 0) {
         errno = __csock_errno(ret);
+        DEBUG_STR("connect error %i\n", errno);
         return SOCKET_ERROR;
     }
     return ret;
