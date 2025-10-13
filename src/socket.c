@@ -100,11 +100,14 @@ LDECL SOCKET CNV socket( int domain, int type, int protocol )
 #ifdef __WINDOWS__
     ___csock_setnblkio(fd, 1);
 #endif
+    DEBUG_STR("\topened socket %i\n", fd);
     return fd;
 }
 
 LDECL int CNV closesocket (SOCKET s)
 {
+    _ENT();
+    DEBUG_STR("\tclosing socket %i\n", s);
     return ___csock_close(s);
 }
 
