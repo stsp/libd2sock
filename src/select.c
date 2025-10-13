@@ -69,5 +69,6 @@ LDECL int CNV NM (int nfds, fd_set *readfds, fd_set *writefds,
     to_fds(_readfds, readfds);
     to_fds(_writefds, writefds);
     to_fds(_exceptfds, exceptfds);
+    DEBUG_STR("\treturning %i\n", ret);
     return ret;
 }

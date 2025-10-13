@@ -27,7 +27,9 @@ LDECL int CNV recv( SOCKET s, RV *buf, RL len, int flags )
             !(psock[s].nb || (flags & MSG_DONTWAIT)), psock[s].blk_arg);
     if (ret < 0) {
         errno = __csock_errno(ret);
+        DEBUG_STR("\treturning error %i\n", ret);
         return SOCKET_ERROR;
     }
+    DEBUG_STR("\treturning %i\n", recvlen);
     return recvlen;
 }
