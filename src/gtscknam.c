@@ -23,7 +23,7 @@ LDECL int CNV getsockname( SOCKET s , struct sockaddr *name , socklen_t *namelen
     err = ___csock_getsockname(s, &sock_addr, &sock_port);
     if (err) {
         errno = __csock_errno(err);
-        return -1;
+        return SOCKET_ERROR;
     }
     *namelen = sizeof (struct sockaddr_in);
 
@@ -43,7 +43,7 @@ LDECL int CNV getpeername( SOCKET s , struct sockaddr *name , socklen_t *namelen
     err = ___csock_getpeername(s, &sock_addr, &sock_port);
     if (err) {
         errno = __csock_errno(err);
-        return -1;
+        return SOCKET_ERROR;
     }
     *namelen = sizeof (struct sockaddr_in);
 

@@ -24,7 +24,7 @@ LDECL int CNV send(SOCKET s, const SV *msg, SL len, int flags)
     ret = ___csock_send(s, msg, len, &sentlen);
     if (ret < 0) {
         errno = __csock_errno(ret);
-        return -1;
+        return SOCKET_ERROR;
     }
     return sentlen;
 }

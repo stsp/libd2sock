@@ -47,6 +47,8 @@ _WCRTLINK extern int _blocking_hook( void *arg );
 #define LDECL _WCRTLINK
 #define CNV
 #define SOCKET int
+#define SOCKET_ERROR -1
+#define INVALID_SOCKET -1
 #define BCALL(r, c, b, a) r = c
 #define BCALL_TO(r, c, s, e, a) r = c
 #endif

@@ -47,7 +47,7 @@ LDECL int CNV setsockopt( SOCKET s, int level, int optname, const SV *optval, so
 {
     _ENT();
     if (level != SOL_SOCKET)
-        return -1;
+        return SOCKET_ERROR;
     switch (optname) {
         case SO_LINGER: {
             int rc;
@@ -56,12 +56,12 @@ LDECL int CNV setsockopt( SOCKET s, int level, int optname, const SV *optval, so
             rc = ___csock_setsolinger(s, lin->l_onoff, lin->l_linger);
             if (rc) {
                 errno = __csock_errno(rc);
-                return -1;
+                return SOCKET_ERROR;
             }
             return 0;
         }
     }
 
     errno = ENOPROTOOPT;
-    return -1;
+    return SOCKET_ERROR;
 }

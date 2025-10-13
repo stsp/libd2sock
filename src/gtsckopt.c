@@ -46,7 +46,7 @@
 LDECL int CNV getsockopt( SOCKET s, int level, int optname, GSO *optval, socklen_t *optlen )
 {
     if (level != SOL_SOCKET)
-        return -1;
+        return SOCKET_ERROR;
     switch (optname) {
         case SO_ERROR: {
             ULONG32 val;
@@ -58,10 +58,10 @@ LDECL int CNV getsockopt( SOCKET s, int level, int optname, GSO *optval, socklen
                 return 0;
             }
             errno = __csock_errno(ret);
-            return -1;
+            return SOCKET_ERROR;
         }
     }
 
     errno = ENOPROTOOPT;
-    return -1;
+    return SOCKET_ERROR;
 }

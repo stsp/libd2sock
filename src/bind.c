@@ -21,7 +21,7 @@ LDECL int CNV bind( SOCKET sockfd, const struct sockaddr *my_addr, socklen_t add
     ret = ___csock_bind(sockfd, my_sa->sin_addr.s_addr, my_sa->sin_port);
     if (ret < 0) {
         errno = __csock_errno(ret);
-        return -1;
+        return SOCKET_ERROR;
     }
     return ret;
 }

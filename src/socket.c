@@ -73,7 +73,7 @@ LDECL SOCKET CNV socket( int domain, int type, int protocol )
     if (err)
         return err;
     if (domain != AF_INET)
-        return -1;
+        return INVALID_SOCKET;
     if (protocol == 0) {
         switch (type) {
         case SOCK_STREAM:
@@ -83,7 +83,7 @@ LDECL SOCKET CNV socket( int domain, int type, int protocol )
             proto = IPPROTO_UDP;
             break;
         default:
-            return -1;
+            return INVALID_SOCKET;
         }
     } else {
         proto = protocol;
@@ -91,7 +91,7 @@ LDECL SOCKET CNV socket( int domain, int type, int protocol )
     err = ___csock_open(proto, &fd);
     if (err) {
         errno = __csock_errno(err);
-        return -1;
+        return INVALID_SOCKET;
     }
     assert(fd < MAX_FDS);
     psock[fd].nb = 0;

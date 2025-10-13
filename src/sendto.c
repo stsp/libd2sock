@@ -27,7 +27,7 @@ LDECL int CNV sendto( SOCKET s, const SV *msg, SL len, int flags, const struct s
             to_sa->sin_port, msg, len, &sentlen);
     if (ret < 0) {
         errno = __csock_errno(ret);
-        return -1;
+        return SOCKET_ERROR;
     }
     return sentlen;
 }

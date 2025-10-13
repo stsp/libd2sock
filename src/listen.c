@@ -19,7 +19,7 @@ LDECL int CNV listen(SOCKET s, int backlog)
     ret = ___csock_listen(s, backlog);
     if (ret < 0) {
         errno = __csock_errno(ret);
-        return -1;
+        return SOCKET_ERROR;
     }
     return ret;
 }

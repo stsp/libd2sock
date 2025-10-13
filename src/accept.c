@@ -27,7 +27,7 @@ LDECL SOCKET CNV accept(SOCKET s, struct sockaddr *addr, socklen_t *addrlen)
             psock[s].blk_arg);
     if (err) {
         errno = __csock_errno(err);
-        return -1;
+        return INVALID_SOCKET;
     }
     /* Copy the peer address */
     addr_sa->sin_family      = AF_INET;
