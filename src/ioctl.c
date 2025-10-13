@@ -16,7 +16,7 @@ LDECL int CNV ioctlsocket (SOCKET fd, long cmd, uint32_t *arg)
 
     _ENT();
     DEBUG_STR("\tfd:%i cmd:%lx\n", fd, cmd);
-    switch (cmd) {
+    switch (__IOC(cmd)) {
     case __IOC(FIONBIO):
         psock[fd].nb = *arg;
 #ifndef __WINDOWS__
