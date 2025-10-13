@@ -13,6 +13,19 @@
 #include "csock.h"
 #include "defs.h"
 
+#ifdef __WINDOWS__
+static int FDIsSet(SOCKET s, fd_set FAR *pfds)
+{
+    int i;
+
+    for (i = 0; i < pfds->fd_count; i++) {
+	if (pfds->fd_array[i] == s)
+	    return TRUE;
+    }
+    return FALSE;
+}
+#endif
+
 static ULONG32 to_int(fd_set *set)
 {
     int i;
@@ -21,7 +34,7 @@ static ULONG32 to_int(fd_set *set)
     if (!set)
         return ret;
     for (i = 0; i < 32; i++) {
-        if (FD_ISSET(i, set))
+        if (_FD_ISSET(i, set))
             ret |= 1 << i;
     }
     return ret;

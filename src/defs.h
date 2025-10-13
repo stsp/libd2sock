@@ -44,6 +44,7 @@ _WCRTLINK extern int _blocking_hook( void *arg );
         (r) < 0 && __csock_errno(r) == EAGAIN && _blocking_hook(a) == 1)
 
 #define __IOC(x) ((x) & 0xffff)
+#define _FD_ISSET(x, y) FDIsSet(x, y)
 #else
 #define LDECL _WCRTLINK
 #define CNV
@@ -53,6 +54,7 @@ _WCRTLINK extern int _blocking_hook( void *arg );
 #define BCALL(r, c, b, a) r = c
 #define BCALL_TO(r, c, s, e, a) r = c
 #define __IOC(x) (x)
+#define _FD_ISSET(x, y) FD_ISSET(x, y)
 #endif
 
 _WCRTLINK void _set_debug_hook(void (far *hook)(const char *));
