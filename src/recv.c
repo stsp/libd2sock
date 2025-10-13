@@ -6,10 +6,12 @@
 #include <winsock.h>
 #define RV char
 #define RL int
+#define RLP "%i"
 #else
 #include <sys/socket.h>
 #define RV void
 #define RL size_t
+#define RLP "%zu"
 #endif
 #include <errno.h>
 #include <assert.h>
@@ -27,9 +29,9 @@ LDECL int CNV recv( SOCKET s, RV *buf, RL len, int flags )
             !(psock[s].nb || (flags & MSG_DONTWAIT)), psock[s].blk_arg);
     if (ret < 0) {
         errno = __csock_errno(ret);
-        DEBUG_STR("\treturning error %i\n", ret);
+        DEBUG_STR("\treturning error %i\n", errno);
         return SOCKET_ERROR;
     }
-    DEBUG_STR("\treturning %i\n", recvlen);
+    DEBUG_STR("\treturning "RLP"\n", recvlen);
     return recvlen;
 }
