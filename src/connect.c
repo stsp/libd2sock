@@ -20,11 +20,12 @@ LDECL int CNV connect(SOCKET s, const struct sockaddr *serv_addr, socklen_t addr
 
     _ENT();
     assert(s < MAX_FDS);
+    DEBUG_STR("\tnb flag for %i: %i\n", s, psock[s].nb);
     BCALL(ret, ___csock_connect(s, sai->sin_addr.s_addr, sai->sin_port),
             !psock[s].nb, psock[s].blk_arg);
     if (ret < 0) {
         errno = __csock_errno(ret);
-        DEBUG_STR("connect error %i\n", errno);
+        DEBUG_STR("\tconnect error %i\n", errno);
         return SOCKET_ERROR;
     }
     return ret;
