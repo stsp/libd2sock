@@ -15,8 +15,9 @@ LDECL int CNV ioctlsocket (SOCKET fd, long cmd, uint32_t *arg)
     int ret = -1;
 
     _ENT();
+    DEBUG_STR("\tfd:%i cmd:%lx\n", fd, cmd);
     switch (cmd) {
-    case FIONBIO:
+    case __IOC(FIONBIO):
         psock[fd].nb = *arg;
 #ifndef __WINDOWS__
         ret = ___csock_setnblkio(fd, *arg);
@@ -24,10 +25,11 @@ LDECL int CNV ioctlsocket (SOCKET fd, long cmd, uint32_t *arg)
         ret = 0;
 #endif
         break;
-    case FIONREAD:
+    case __IOC(FIONREAD):
         ret = ___csock_fionread(fd, arg);
         break;
     default:
+        _debug_out("\tunsupported\n");
         errno = EINVAL;
         return ret;
     }

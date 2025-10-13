@@ -48,6 +48,7 @@ LDECL int CNV setsockopt( SOCKET s, int level, int optname, const SV *optval, so
     _ENT();
     if (level != SOL_SOCKET)
         return SOCKET_ERROR;
+    DEBUG_STR("\tfd:%i optname:%x\n", s, optname);
     switch (optname) {
         case SO_LINGER: {
             int rc;
@@ -62,6 +63,7 @@ LDECL int CNV setsockopt( SOCKET s, int level, int optname, const SV *optval, so
         }
     }
 
+    _debug_out("\tunsupported\n");
     errno = ENOPROTOOPT;
     return SOCKET_ERROR;
 }
