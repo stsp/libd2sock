@@ -63,6 +63,7 @@ LDECL int CNV NM (int nfds, fd_set *readfds, fd_set *writefds,
             start, expi, NULL);
     if (ret < 0) {
         errno = __csock_errno (ret);
+        DEBUG_STR("\treturning error %i\n", errno);
         return SOCKET_ERROR;
     }
     to_fds(_readfds, readfds);
