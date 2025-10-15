@@ -57,6 +57,12 @@ _WCRTLINK void d2s_close_intercept(int s, void *arg)
     psock[s].close_arg = arg;
 }
 
+_WCRTLINK void *d2s_get_close_arg(int s)
+{
+    assert(s < MAX_FDS);
+    return psock[s].close_arg;
+}
+
 int csock_init(void)
 {
     const int CSOCK_VXD_ID = 0x1235;
