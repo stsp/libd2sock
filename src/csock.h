@@ -73,6 +73,7 @@ extern int __csock_errno (int /* i_errno */);
 struct per_sock {
     unsigned int nb:1;
     void *blk_arg;
+    void *close_arg;
 };
 extern struct per_sock psock[MAX_FDS];
 
