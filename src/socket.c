@@ -10,6 +10,7 @@
 #endif
 #include <assert.h>
 #include <errno.h>
+#include <d2sock.h>
 #include "csock.h"
 #include "defs.h"
 
@@ -27,7 +28,7 @@ _WCRTLINK int _blocking_hook(void *arg)
     return 1;
 }
 
-_WCRTLINK void _set_blocking_hook(int (far *hook)(void *))
+_WCRTLINK void d2s_set_blocking_hook(int (far *hook)(void *))
 {
     __blocking_hook = hook;
 }
@@ -38,7 +39,7 @@ _WCRTLINK void _debug_out(const char *msg)
         __debug_hook(msg);
 }
 
-_WCRTLINK void _set_debug_hook(void (far *hook)(const char *))
+_WCRTLINK void d2s_set_debug_hook(void (far *hook)(const char *))
 {
     __debug_hook = hook;
 }

@@ -27,10 +27,7 @@ _WCRTLINK extern void            endservent( void );
 _WCRTLINK extern struct netent   *getnetent( void );
 _WCRTLINK extern void            setnetent( int __stayopen );
 _WCRTLINK extern void            endnetent( void );
-_WCRTLINK extern void            freehostent(struct hostent *he);
-_WCRTLINK extern struct hostent  *gethostbyname_ex( const char *__name, void *arg );
 
-_WCRTLINK extern void _set_blocking_hook(int (far *hook)(void *arg));
 _WCRTLINK extern int _blocking_hook( void *arg );
 #define BCALL(r, c, b, a) do { \
     r = c; \
@@ -57,7 +54,6 @@ _WCRTLINK extern int _blocking_hook( void *arg );
 #define _FD_ISSET(x, y) FD_ISSET(x, y)
 #endif
 
-_WCRTLINK void _set_debug_hook(void (far *hook)(const char *));
 _WCRTLINK void _debug_out(const char *msg);
 #define _ENT() _debug_out("enter: " __FUNCTION__ "\r\n")
 #define DEBUG_STR(...) { \
