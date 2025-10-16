@@ -138,3 +138,8 @@ void set_blk_arg(int fd, void *arg)
     assert(fd < MAX_FDS);
     psock[fd].blk_arg = arg;
 }
+
+_WCRTLINK void d2s_set_blocking_arg(int fd, void *arg)
+{
+    set_blk_arg(fd, arg);
+}
