@@ -51,7 +51,7 @@ _WCRTLINK void d2s_set_debug_hook(void (far *hook)(const char *))
     __debug_hook = hook;
 }
 
-_WCRTLINK void d2s_close_intercept(int s, void *arg)
+_WCRTLINK void d2s_set_close_arg(int s, void *arg)
 {
     assert(s < MAX_FDS);
     psock[s].close_arg = arg;

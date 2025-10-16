@@ -72,9 +72,12 @@ extern int __csock_errno (int /* i_errno */);
 #define MAX_FDS 32
 struct per_sock {
     unsigned int nb:1;
+    int state;
     void *blk_arg;
     void *close_arg;
 };
 extern struct per_sock psock[MAX_FDS];
+
+enum { SF_NONE, SF_CONNECTING };
 
 #endif

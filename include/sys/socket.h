@@ -149,6 +149,7 @@ _WCRTLINK extern int getpeername( int __s, struct sockaddr *__name, socklen_t *_
 _WCRTLINK extern int getsockname( int __s , struct sockaddr *__name, socklen_t *__namelen );
 _WCRTLINK extern int getpeername( int __s , struct sockaddr *__name, socklen_t *__namelen );
 _WCRTLINK extern int connect( int __sockfd, const struct sockaddr *__serv_addr, socklen_t __addrlen );
+_WCRTLINK extern int aconnect(int __s);
 _WCRTLINK extern int shutdown( int __s, int __how );
 
 
