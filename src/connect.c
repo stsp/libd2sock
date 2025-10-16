@@ -62,7 +62,7 @@ static int is_connected(int s)
 
 _WCRTLINK int aconnect(SOCKET s)
 {
-    _ENT();
+//    _ENT();
     assert(s < MAX_FDS);
     if (psock[s].state != SF_CONNECTING) {
         errno = EINVAL;
