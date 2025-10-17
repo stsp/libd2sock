@@ -20,7 +20,7 @@ struct driver_info_rec driver_info;
 struct per_sock psock[MAX_FDS];
 
 static int (far *__blocking_hook)(void *);
-static void (far *__close_hook)(int, void *);
+static int (far *__close_hook)(int, void *);
 static void (far *__debug_hook)(const char *);
 
 _WCRTLINK int _blocking_hook(void *arg)
@@ -35,7 +35,7 @@ _WCRTLINK void d2s_set_blocking_hook(int (far *hook)(void *))
     __blocking_hook = hook;
 }
 
-_WCRTLINK void d2s_set_close_hook(void (far *hook)(int, void *))
+_WCRTLINK void d2s_set_close_hook(int (far *hook)(int, void *))
 {
     __close_hook = hook;
 }
@@ -125,11 +125,15 @@ LDECL SOCKET CNV socket( int domain, int type, int protocol )
 
 LDECL int CNV closesocket (SOCKET s)
 {
+    int clo = 1;
+
     _ENT();
     assert(s < MAX_FDS);
     DEBUG_STR("\tclosing socket %i\n", s);
     if (__close_hook && psock[s].close_arg)
-        __close_hook(s, psock[s].close_arg);
+        clo = __close_hook(s, psock[s].close_arg);
+    if (!clo)
+        return 0;
     return ___csock_close(s);
 }
 
