@@ -83,7 +83,7 @@ call DWORD PTR ds:[_csock_entry]
 endif
 endm
 
-wptr4 macro d, s, t, wt
+wptr4 macro d, s, t
 ifdef __USE32
 mov [d], s
 else
@@ -91,19 +91,20 @@ push es
 push t
 mov t, d
 shr t, 16
-mov es, wt
-and d, 0ffffh
-mov es:[d], s
+mov es, t
+mov t, d
+and t, 0ffffh
+mov es:[t], s
 pop t
 pop es
 endif
 endm
 
 wptr macro d, s
-wptr4 d, s, eax, ax
+wptr4 d, s, eax
 endm
 
-rptr4 macro d, s, t, wt
+rptr4 macro d, s, t
 ifdef __USE32
 mov d, [s]
 else
@@ -111,14 +112,15 @@ push es
 push t
 mov t, s
 shr t, 16
-mov es, wt
-and s, 0ffffh
-mov d, es:[s]
+mov es, t
+mov t, s
+and t, 0ffffh
+mov d, es:[t]
 pop t
 pop es
 endif
 endm
 
 rptr macro d, s
-rptr4 d, s, eax, ax
+rptr4 d, s, eax
 endm
